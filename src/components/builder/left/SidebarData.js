@@ -1,86 +1,85 @@
 import React from 'react'
 import * as GrIcons from 'react-icons/gr'
-{/* <GrIcons fill="red" stroke="green" /> */}
 
 
 
 export const SidebarData = [
   {
     title: 'Napisz CV',
-    path: '/writecv',
+    path: '/content',
     icon: <GrIcons.GrTerminal />,
     iconClosed: <GrIcons.GrFormDown stroke={'white'} fill={'white'} />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Dane osobowe',
-        path: '/writecv/personalData',
+        path: '/content/personalData',
       },
       {
         title: 'Doświadczenie',
-        path: '/writecv/experience',
+        path: '/content/experience',
       },
       {
         title: 'Wykształcenie',
-        path: '/writecv/education',
+        path: '/content/education',
       },
       {
         title: 'Umiejętności',
-        path: '/writecv/skills',
+        path: '/content/skills',
       },
       {
         title: 'Podsumowanie',
-        path: '/writecv/summary',
+        path: '/content/summary',
       },
       {
         title: 'Klauzula CV',
-        path: '/writecv/clause',
+        path: '/content/clause',
       },
       {
         title: 'Języki obce',
-        path: '/writecv/languages',
+        path: '/content/languages',
       },
       {
         title: 'Dodaj / usuń sekcję',
-        path: '/writecv/manageSection',
+        path: '/content/manageSection',
       },
     ]
   },
   {
     title: 'Formatuj CV',
-    path: '/formatcv',
+    path: '/design',
     icon: <GrIcons.GrEdit />,
     iconClosed: <GrIcons.GrFormDown />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Czcionki',
-        path: '/formatcv/fonts',
+        path: '/design/fonts',
       },
       {
         title: 'Odstępy i marginesy',
-        path: '/formatcv/spacingAndMargins',
+        path: '/design/spacingAndMargins',
       },
     ]
   },
   {
     title: 'Zmień wygląd',
-    path: '/changeView',
+    path: '/design',
     icon: <GrIcons.GrBrush />,
     iconClosed: <GrIcons.GrFormDown />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Kolory',
-        path: '/changeView/fonts',
+        path: '/design/fonts',
       },
       {
         title: 'Szablony',
-        path: '/changeView/schemas',
+        path: '/design/schemas',
       },
       {
         title: 'Układ sekcji',
-        path: '/changeView/sectionSetup',
+        path: '/design/sectionSetup',
       },
     ]
   }

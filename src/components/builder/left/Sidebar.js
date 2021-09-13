@@ -14,6 +14,7 @@ const LeftSideBarWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+  position: relative;
 `
 const LogoImage = styled.img`
   /* width: 100%; */
@@ -24,6 +25,14 @@ const LogoImage = styled.img`
 const NavWrap = styled.div`
   width: 100%;
   flex: 1 1;
+  flex-direction: column;
+  display: flex;
+  align-items: left;
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+  display: none;
+  }
 `
 
 const LeftSideBar = () => (
