@@ -7,6 +7,8 @@ import Sidebar from 'components/builder/left/Sidebar'
 import Preview from 'components/builder/right/Preview'
 import Builder from 'components/builder/center/Builder'
 
+
+
 const Wrapper = styled.div`
 display: flex;
 `
@@ -22,6 +24,7 @@ const Root = () => (
         <Builder></Builder>
         <Preview></Preview>
       </Wrapper>
+
 
     </Router>
   </>

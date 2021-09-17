@@ -1,14 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import siteLogo from 'assets/logo.png'
+import { Route } from 'react-router'
 
 import DownloadResume from 'components/builder/left/DownloadResume'
-import { SidebarData } from 'components/builder/left/SidebarData'
+import { SidebarData } from 'data/SidebarData'
 import SubMenu from 'components/builder/left/SubMenu'
 
 
 const LeftSideBarWrapper = styled.div`
-  width: 30rem;
+  width: 27rem;
   background-color: #333333;
   height: 100vh;
   display: flex;
@@ -38,14 +39,15 @@ const NavWrap = styled.div`
 const LeftSideBar = () => (
 
   <LeftSideBarWrapper>
-    <LogoImage src={siteLogo} />
+    <LogoImage src={siteLogo} >
+    </LogoImage>
     <NavWrap>
       {SidebarData.map((item, index) => {
         return <SubMenu item={item} key={index} />
       })}
     </NavWrap>
-    <DownloadResume>aaa</DownloadResume>
-  </LeftSideBarWrapper>
+    <DownloadResume></DownloadResume>
+  </LeftSideBarWrapper >
 
 )
 

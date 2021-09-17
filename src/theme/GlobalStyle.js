@@ -28,9 +28,12 @@ body {
 
 :root {
   --spacing-small: 1px;
+  --spacing-medium: 1.3px;
   --color-white: white;
   --color-black-light: rgba(18, 18, 15, 0.3);
   --color-black-medium: rgba(18, 18, 15, 0.3);
+  --color-neutral: #f8f8f9;
+  --color-neutral-400: #f2f2f2;
 }
 `
 

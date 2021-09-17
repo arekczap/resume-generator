@@ -1,12 +1,9 @@
 import React from 'react'
 import * as GrIcons from 'react-icons/gr'
 
-
-
 export const SidebarData = [
   {
     title: 'Napisz CV',
-    path: '/content',
     icon: <GrIcons.GrTerminal />,
     iconClosed: <GrIcons.GrFormDown stroke={'white'} fill={'white'} />,
     iconOpen: <GrIcons.GrFormUp />,
@@ -14,22 +11,30 @@ export const SidebarData = [
       {
         title: 'Dane osobowe',
         path: '/content/personalData',
+        headingContent: 'Sugerujemy dodanie jak najwiekszej ilości informacji'
       },
       {
         title: 'Doświadczenie',
         path: '/content/experience',
+        headingContent: 'Zacznij od opisu obecnego stanowiska, potem wymień wcześniejsze zajęcia.'
       },
       {
         title: 'Wykształcenie',
         path: '/content/education',
+        headingContent: 'Wymień szkoły i uczelnie, do których uczęszczałeś.'
+
       },
       {
         title: 'Umiejętności',
         path: '/content/skills',
+        headingContent: 'Wymień najważniejsze umiejętności i oceń ich poziom.'
+
       },
       {
         title: 'Podsumowanie',
         path: '/content/summary',
+        headingContent: 'Przedstaw krótki opis swoich umiejętności, osiągnięć i doświadczenia.'
+
       },
       {
         title: 'Klauzula CV',
@@ -40,8 +45,8 @@ export const SidebarData = [
         path: '/content/languages',
       },
       {
-        title: 'Dodaj / usuń sekcję',
-        path: '/content/manageSection',
+        title: 'Zainteresowania',
+        path: '/content/interested',
       },
     ]
   },
@@ -71,11 +76,11 @@ export const SidebarData = [
     subNav: [
       {
         title: 'Kolory',
-        path: '/design/fonts',
+        path: '/design/colors',
       },
       {
         title: 'Szablony',
-        path: '/design/schemas',
+        path: '/design/templates',
       },
       {
         title: 'Układ sekcji',

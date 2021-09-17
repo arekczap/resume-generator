@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
-const SidebarLink = styled(Link)`
+const SidebarLink = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,7 +14,10 @@ const SidebarLink = styled(Link)`
   text-decoration: none;
   line-height: 6rem;
   letter-spacing: var(--spacing-small);
+  cursor: pointer;
+   user-select: none;
   transition: background-color 0.2s;
+
     
   & > svg {
     font-size: 2.5rem;
@@ -58,7 +61,7 @@ const SubMenu = ({ item }) => {
 
   return (
     <>
-      <SidebarLink to={item.path} onClick={toogleSidebar} >
+      <SidebarLink onClick={toogleSidebar} >
         {item.icon}
         <SidebarLabel>{item.title}</SidebarLabel>
         {
