@@ -37,7 +37,7 @@ const Routes = () => {
         }
       })
     })
-  }, [location])
+  }, [])
 
   return (
     <>

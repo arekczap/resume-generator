@@ -4,9 +4,9 @@ import Root from 'Root/Root'
 
 
 ReactDOM.render(
-  <React.StrictMode>
+  <>
     <Root />
-  </React.StrictMode>,
+  </>,
   document.getElementById('root')
 )
 
