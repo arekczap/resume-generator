@@ -1,86 +1,90 @@
 import React from 'react'
 import * as GrIcons from 'react-icons/gr'
-{/* <GrIcons fill="red" stroke="green" /> */}
-
-
 
 export const SidebarData = [
   {
     title: 'Napisz CV',
-    path: '/writecv',
     icon: <GrIcons.GrTerminal />,
     iconClosed: <GrIcons.GrFormDown stroke={'white'} fill={'white'} />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Dane osobowe',
-        path: '/writecv/personalData',
+        path: '/content/personalData',
+        headingContent: 'Sugerujemy dodanie jak najwiekszej ilości informacji'
       },
       {
         title: 'Doświadczenie',
-        path: '/writecv/experience',
+        path: '/content/experience',
+        headingContent: 'Zacznij od opisu obecnego stanowiska, potem wymień wcześniejsze zajęcia.'
       },
       {
         title: 'Wykształcenie',
-        path: '/writecv/education',
+        path: '/content/education',
+        headingContent: 'Wymień szkoły i uczelnie, do których uczęszczałeś.'
+
       },
       {
         title: 'Umiejętności',
-        path: '/writecv/skills',
+        path: '/content/skills',
+        headingContent: 'Wymień najważniejsze umiejętności i oceń ich poziom.'
+
       },
       {
         title: 'Podsumowanie',
-        path: '/writecv/summary',
+        path: '/content/summary',
+        headingContent: 'Przedstaw krótki opis swoich umiejętności, osiągnięć i doświadczenia.'
+
       },
       {
         title: 'Klauzula CV',
-        path: '/writecv/clause',
+        path: '/content/clause',
       },
       {
         title: 'Języki obce',
-        path: '/writecv/languages',
+        path: '/content/languages',
       },
       {
-        title: 'Dodaj / usuń sekcję',
-        path: '/writecv/manageSection',
+        title: 'Zainteresowania',
+        path: '/content/interested',
       },
     ]
   },
   {
     title: 'Formatuj CV',
-    path: '/formatcv',
+    path: '/design',
     icon: <GrIcons.GrEdit />,
     iconClosed: <GrIcons.GrFormDown />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Czcionki',
-        path: '/formatcv/fonts',
+        path: '/design/fonts',
       },
       {
         title: 'Odstępy i marginesy',
-        path: '/formatcv/spacingAndMargins',
+        path: '/design/spacingAndMargins',
       },
     ]
   },
   {
     title: 'Zmień wygląd',
-    path: '/changeView',
+    path: '/design',
     icon: <GrIcons.GrBrush />,
     iconClosed: <GrIcons.GrFormDown />,
     iconOpen: <GrIcons.GrFormUp />,
     subNav: [
       {
         title: 'Kolory',
-        path: '/changeView/fonts',
+        path: '/design/colors',
       },
       {
         title: 'Szablony',
-        path: '/changeView/schemas',
+        path: '/design/templates',
       },
       {
         title: 'Układ sekcji',
-        path: '/changeView/sectionSetup',
+        path: '/design/sectionSetup',
       },
     ]
   }
