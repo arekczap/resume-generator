@@ -11,7 +11,7 @@ width: 100%;
 font-size: 2.2rem;
 font-weight: 400;
 padding: 1rem 1rem;
-background-color: #5c5c5c;
+background-color: var(--color-secondary);
 color: white;
 border-radius: 5px;
 border: none;
@@ -24,11 +24,9 @@ transition: background-color .4s;
 `
 
 const DownloadResume = () => (
-  <>
-    <DownloadWrapper>
-      <DownloadButton>Pobierz Twoje CV</DownloadButton>
-    </DownloadWrapper>
-  </>
+  <DownloadWrapper>
+    <DownloadButton>Pobierz Twoje CV</DownloadButton>
+  </DownloadWrapper>
 )
 
 

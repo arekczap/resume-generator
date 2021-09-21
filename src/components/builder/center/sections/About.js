@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import HeaderBuilder from 'components/shared/HeaderBuilder'
 import Input from 'components/shared/Input'
 import PhotoInput from 'components/shared/PhotoInput'
+import EditSectionLink from 'components/shared/EditSectionLink'
+
 
 import { AboutSectionData } from 'data/AboutSectionData'
 
@@ -14,25 +16,39 @@ const BasicDataWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-const About = (props) => {
+const SectionSettingsWrapper = styled.div`
+  width: 100%;
+  margin: 1.2rem 0;
+`
 
-  console.log('rendered')
+
+
+const About = (props) => {
+  const { basicData, photoData, extraData } = AboutSectionData
+  const { name, desc } = props.data
+
+  const getInputFromData = (data) => {
+    return data.map((item, index) => {
+      return <Input
+        labelName={item.labelText}
+        placeholderName={item.placeholderText}
+        disabled={item.disabled}
+        type={item.type}
+        key={index}
+      />
+    })
+  }
+
   return (
     <>
-      <HeaderBuilder name={props.data.name} content={props.data.desc} />
+      <HeaderBuilder name={name} content={desc} />
       <BasicDataWrapper>
-        {
-          AboutSectionData.basicData.map((item) => {
-            return <Input
-              labelName={item.labelText}
-              placeholderName={item.placeholderText}
-              active={item.disabled}
-              type={item.type}
-            />
-          })
-        }
-
-        <PhotoInput></PhotoInput>
+        <SectionSettingsWrapper>
+          <EditSectionLink>Edytuj sekcję</EditSectionLink>
+        </SectionSettingsWrapper>
+        {getInputFromData(basicData)}
+        <PhotoInput data={photoData} />
+        {getInputFromData(extraData)}
       </BasicDataWrapper>
     </>
   )

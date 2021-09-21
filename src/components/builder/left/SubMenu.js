@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 
-const SidebarLink = styled.div`
+const GroupName = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,7 +15,7 @@ const SidebarLink = styled.div`
   line-height: 6rem;
   letter-spacing: var(--spacing-small);
   cursor: pointer;
-   user-select: none;
+  user-select: none;
   transition: background-color 0.2s;
 
     
@@ -32,16 +32,14 @@ const SidebarLink = styled.div`
   }
 `
 
-const SidebarLabel = styled.span`
-  /* padding: 0 2rem 0 2rem; */
+const LinkLabel = styled.span`
 `
-
 
 const DropDownLink = styled(Link)`
   color: var(--color-white);
   text-decoration: none;
   line-height: 5.5rem;
-  margin: 0 2rem;
+  margin: 0 1.6rem;
   padding: 0 2rem 0 3rem;
   border-radius: 5px;
   transition: background-color 0.2s;
@@ -52,8 +50,6 @@ const DropDownLink = styled(Link)`
   }
 `
 
-
-
 const SubMenu = ({ item }) => {
   const [subnav, sideBar] = useState(true)
   const toogleSidebar = () => sideBar(!subnav)
@@ -61,9 +57,9 @@ const SubMenu = ({ item }) => {
 
   return (
     <>
-      <SidebarLink onClick={toogleSidebar} >
+      <GroupName onClick={toogleSidebar} >
         {item.icon}
-        <SidebarLabel>{item.title}</SidebarLabel>
+        <LinkLabel>{item.title}</LinkLabel>
         {
           subnav
             ? item.iconOpen
@@ -71,12 +67,12 @@ const SubMenu = ({ item }) => {
               ? item.iconClosed
               : null
         }
-      </SidebarLink>
+      </GroupName>
       {
         subnav && item.subNav.map((item, index) => {
           return (
             <DropDownLink to={item.path} key={index}>
-              <SidebarLabel>{item.title}</SidebarLabel>
+              <LinkLabel>{item.title}</LinkLabel>
             </DropDownLink>
           )
         })

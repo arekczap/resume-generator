@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import siteLogo from 'assets/logo.png'
-import { Route } from 'react-router'
 
 import DownloadResume from 'components/builder/left/DownloadResume'
 import { SidebarData } from 'data/SidebarData'
@@ -10,7 +9,7 @@ import SubMenu from 'components/builder/left/SubMenu'
 
 const LeftSideBarWrapper = styled.div`
   width: 27rem;
-  background-color: #333333;
+  background-color: var(--color-primary);
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -18,7 +17,6 @@ const LeftSideBarWrapper = styled.div`
   position: relative;
 `
 const LogoImage = styled.img`
-  /* width: 100%; */
   margin: 3rem 4rem;
   cursor: pointer;
 `
@@ -37,7 +35,6 @@ const NavWrap = styled.div`
 `
 
 const LeftSideBar = () => (
-
   <LeftSideBarWrapper>
     <LogoImage src={siteLogo} >
     </LogoImage>
@@ -48,9 +45,6 @@ const LeftSideBar = () => (
     </NavWrap>
     <DownloadResume></DownloadResume>
   </LeftSideBarWrapper >
-
 )
-
-
 
 export default LeftSideBar

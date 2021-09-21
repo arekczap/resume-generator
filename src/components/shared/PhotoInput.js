@@ -80,12 +80,14 @@ const HintText = styled.li`
 `
 
 
-const PhotoInput = () => {
+const PhotoInput = (props) => {
+  const { headerText, hints } = props.data
+
   return (
     <>
       <MainWrapper>
         <PhotoUpdateFieldWrapper>
-          <UploadImageFieldLabel for={'imgFile'}>
+          <UploadImageFieldLabel htmlFor={'imgFile'}>
             <BsPersonPlusFill style={
               {
                 width: '70%',
@@ -97,10 +99,13 @@ const PhotoInput = () => {
           <UploadImageFieldInput id={'imgFile'} />
         </PhotoUpdateFieldWrapper>
         <TextContentWrapper>
-          <HeaderText>{'Dodaj swoje zdjęcie'}</HeaderText>
+          <HeaderText>{headerText}</HeaderText>
           <ul>
-            <HintText>{'Wybierz wyraźne zdjęcie'}</HintText>
-            <HintText>{'Fotografia powinna mieć jednolite tło'}</HintText>
+            {
+              hints.map((item, index) => {
+                return <HintText key={index}>{item}</HintText>
+              })
+            }
           </ul>
         </TextContentWrapper>
       </MainWrapper>

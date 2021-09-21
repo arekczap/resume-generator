@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { useLocation } from 'react-router'
 
 import Routes from 'components/builder/center/sections/routes/Routes'
 
@@ -9,13 +8,26 @@ width: 100%;
 height: 100vh;
 display: flex;
 flex-direction: column;
-
 `
 
 const SectionBuilderWrapper = styled.div`
 height: 100%;
-padding: 3rem;
+padding: 2rem;
+overflow: auto;
+margin: 0.5rem;
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black-medium);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-black-hard);
+  border-radius: 5px;
+}
 `
 
 const SwitchFieldSectionWrapper = styled.div`
@@ -25,10 +37,6 @@ const SwitchFieldSectionWrapper = styled.div`
 
 
 const Builder = () => {
-
-
-
-
   return (
     <>
       <SectionWrapper >
