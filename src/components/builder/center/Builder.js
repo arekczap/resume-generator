@@ -8,6 +8,7 @@ width: 100%;
 height: 100vh;
 display: flex;
 flex-direction: column;
+background-color: var(--color-primary-100);
 `
 
 const SectionBuilderWrapper = styled.div`
@@ -20,12 +21,8 @@ margin: 0.5rem;
   width: 10px;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-black-medium);
-}
-
 ::-webkit-scrollbar-thumb {
-  background: var(--color-black-hard);
+  background-color: var(--color-primary-400);
   border-radius: 5px;
 }
 `

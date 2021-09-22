@@ -8,8 +8,8 @@ import SubMenu from 'components/builder/left/SubMenu'
 
 
 const LeftSideBarWrapper = styled.div`
-  width: 27rem;
-  background-color: var(--color-primary);
+  width: 22rem;
+  background-color: var(--color-primary-50);
   height: 100vh;
   display: flex;
   justify-content: space-between;
@@ -43,7 +43,7 @@ const LeftSideBar = () => (
         return <SubMenu item={item} key={index} />
       })}
     </NavWrap>
-    <DownloadResume></DownloadResume>
+    {/* <DownloadResume></DownloadResume> */}
   </LeftSideBarWrapper >
 )
 

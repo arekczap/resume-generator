@@ -4,7 +4,9 @@ const GlobalStyle = createGlobalStyle`
 *,
 *::after,
 *::before {
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
   padding: 0;
   margin: 0;
   -webkit-font-smoothing: antialiased;
@@ -22,7 +24,7 @@ html {
 body {
   font-size: 1.6rem;
   background-color: #5c5c5c;
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 
 :root {
@@ -37,6 +39,18 @@ body {
   --color-black-hard: rgba(18, 18, 15, 0.6);
   --color-neutral: #f8f8f9;
   --color-neutral-400: #f2f2f2;
+
+
+    --color-primary-50: #212121;
+    --color-primary-100: #2c2c2c;
+    --color-primary-200: #424242;
+    --color-primary-300: #616161;
+    --color-primary-400: #757575;
+    --color-primary-500: #9e9e9e;
+    --color-primary-600: #bdbdbd;
+    --color-primary-700: #e0e0e0;
+    --color-primary-800: #eeeeee;
+    --color-primary-900: #f5f5f5;
 }
 `
 

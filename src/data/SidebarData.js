@@ -62,8 +62,8 @@ export const SidebarData = [
         path: '/design/fonts',
       },
       {
-        title: 'Odstępy i marginesy',
-        path: '/design/spacingAndMargins',
+        title: 'Odstępy',
+        path: '/design/spacings',
       },
     ]
   },

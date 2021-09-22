@@ -9,7 +9,7 @@ const GroupName = styled.div`
   align-items: center;
   width: 100%;
   color: white;
-  font-size: 1.9rem;
+
   padding: 0 2.5rem 0 2.5rem;
   text-decoration: none;
   line-height: 6rem;
@@ -28,11 +28,12 @@ const GroupName = styled.div`
   }
 
   :hover {
-    background-color: var(--color-black-medium);
+    background-color: var(--color-primary-200);
   }
 `
 
 const LinkLabel = styled.span`
+  font-size: 1.4rem;
 `
 
 const DropDownLink = styled(Link)`
@@ -46,7 +47,7 @@ const DropDownLink = styled(Link)`
   letter-spacing: var(--spacing-small);
 
   :hover {
-    background-color: var(--color-black-light);
+    background-color: var(--color-primary-100);
   }
 `
 

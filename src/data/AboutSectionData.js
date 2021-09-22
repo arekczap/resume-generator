@@ -73,49 +73,6 @@ export const AboutSectionData =
       placeholderText: 'www.twoja-strona.pl',
       disabled: false,
       type: 'text'
-    },
-    {
-      labelText: 'Obywatelstwo',
-      placeholderText: 'polskie',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Miejsce urodzenia',
-      placeholderText: 'Warszawa',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Stan cywilny',
-      placeholderText: 'Żonaty',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Facebook',
-      placeholderText: 'www.facebook.con/imie.nazwisko',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Stack Overflow',
-      placeholderText: 'https://stackoverflow.com/',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Twitter',
-      placeholderText: 'https://twitter.com/nazwa',
-      disabled: false,
-      type: 'text'
-    },
-    {
-      labelText: 'Instagram',
-      placeholderText: 'https://www.instagram.com/nazwa',
-      disabled: false,
-      type: 'text'
     }
-
   ],
 }

@@ -7,7 +7,7 @@ const MainWrapper = styled.div`
   width: 100%;
   position: relative;
   margin-top: 20rem;
-  background-color: var(--color-neutral);
+  background-color: var(--color-primary-200);
   border-radius: 7px;
   letter-spacing: var(--spacing-small);
   user-select: none;
@@ -25,7 +25,7 @@ const PhotoUpdateFieldWrapper = styled.div`
   min-height: 6rem;
   max-height: 6rem;
   height: 6rem;
-  border: 1px dashed black;
+  border: 1px dashed var(--color-primary-900);
   border-radius: 7px;
   transition: background-color 0.2s;
   cursor: pointer;
@@ -34,7 +34,7 @@ const PhotoUpdateFieldWrapper = styled.div`
   align-items: center;
  
   :hover {
-    background-color: rgba(224, 224, 224, 0.7);
+    background-color: var(--color-primary-300);
   }
 `
 
@@ -62,11 +62,11 @@ const UploadImageFieldInput = styled.input.attrs(
 
 const TextContentWrapper = styled.div`
   margin-left: 2rem;
+  color: var(--color-primary-600);
 `
 
 const HeaderText = styled.h2`
   font-size: 1.4rem;
-  
 `
 
 const HintText = styled.li`
@@ -74,7 +74,6 @@ const HintText = styled.li`
  margin: 0.5rem 0 0 2rem;
 
  ::marker {
-   color: black;
   font-size: 1.5rem;
  }
 `
@@ -93,6 +92,7 @@ const PhotoInput = (props) => {
                 width: '70%',
                 height: '70%',
                 opacity: '0.7',
+                fill: 'var(--color-primary-900)',
               }
             } />
           </UploadImageFieldLabel>
