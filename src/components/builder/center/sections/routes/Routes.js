@@ -3,18 +3,17 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
 
-import { SidebarData } from 'data/SidebarData'
+
+import { sidebarData } from 'data/sidebarData'
 import routesData from './RoutesData'
 
 const Routes = () => {
   const location = useLocation()
   const [elementData, setData] = useState({})
 
-
-
   //set data header name, desc to builder component
   useEffect(() => {
-    SidebarData.forEach((item) => {
+    sidebarData.forEach((item) => {
       item.subNav.forEach((item) => {
         if (item.path === location.pathname) {
           setData({
@@ -33,13 +32,18 @@ const Routes = () => {
           routesData.map((item, index) => {
             return <Route
               path={item.path}
-              render={() => <item.component data={elementData} />}
+              render={() => {
+                return <item.component
+                  data={elementData}
+                  sectionId={item.key}
+                />
+              }
+              }
               key={index}
+
             />
           })
-
         }
-
       </Switch>
     </>
   )

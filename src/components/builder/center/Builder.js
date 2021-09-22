@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Routes from 'components/builder/center/sections/routes/Routes'
 
 const SectionWrapper = styled.div`
-width: 100%;
+width: 70%;
 height: 100vh;
 display: flex;
 flex-direction: column;
@@ -41,7 +41,7 @@ const Builder = () => {
           <Routes />
 
         </SectionBuilderWrapper>
-        <SwitchFieldSectionWrapper />
+        {/* <SwitchFieldSectionWrapper /> */}
       </SectionWrapper>
     </>
   )

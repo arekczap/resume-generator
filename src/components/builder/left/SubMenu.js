@@ -20,7 +20,7 @@ const GroupName = styled.div`
 
     
   & > svg {
-    font-size: 2.5rem;
+    font-size: 2.2rem;
   }
 
   & > svg > path, polyline {
@@ -34,6 +34,7 @@ const GroupName = styled.div`
 
 const LinkLabel = styled.span`
   font-size: 1.4rem;
+  margin-left: 0.5rem;
 `
 
 const DropDownLink = styled(Link)`

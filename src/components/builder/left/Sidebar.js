@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import siteLogo from 'assets/logo.png'
 
 import DownloadResume from 'components/builder/left/DownloadResume'
-import { SidebarData } from 'data/SidebarData'
+import { sidebarData } from 'data/sidebarData'
 import SubMenu from 'components/builder/left/SubMenu'
 
 
@@ -39,7 +39,7 @@ const LeftSideBar = () => (
     <LogoImage src={siteLogo} >
     </LogoImage>
     <NavWrap>
-      {SidebarData.map((item, index) => {
+      {sidebarData.map((item, index) => {
         return <SubMenu item={item} key={index} />
       })}
     </NavWrap>

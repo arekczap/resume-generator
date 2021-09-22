@@ -1,7 +1,7 @@
 import React from 'react'
 import * as GrIcons from 'react-icons/gr'
 
-export const SidebarData = [
+export const sidebarData = [
   {
     title: 'Napisz CV',
     icon: <GrIcons.GrTerminal />,
@@ -22,19 +22,16 @@ export const SidebarData = [
         title: 'Wykształcenie',
         path: '/content/education',
         headingContent: 'Wymień szkoły i uczelnie, do których uczęszczałeś.'
-
       },
       {
         title: 'Umiejętności',
         path: '/content/skills',
         headingContent: 'Wymień najważniejsze umiejętności i oceń ich poziom.'
-
       },
       {
         title: 'Podsumowanie',
         path: '/content/summary',
         headingContent: 'Przedstaw krótki opis swoich umiejętności, osiągnięć i doświadczenia.'
-
       },
       {
         title: 'Klauzula CV',

@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
+import { ResumeContext } from 'contexts/ResumeContext'
+
 
 const SectionWrapper = styled.div`
 width: 100%;
@@ -9,9 +11,14 @@ background-color: white;
 
 
 const Preview = () => {
+  // const [value, setValue] = useContext(ResumeContext)
+
   return (
     <>
-      <SectionWrapper />
+      <SectionWrapper>
+        {/* <h1>{value.profile.firstName}</h1> */}
+
+      </SectionWrapper>
     </>
   )
 }

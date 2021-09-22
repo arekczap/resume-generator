@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 import { AiFillCheckCircle } from "react-icons/ai"
-
+import { ResumeContext } from 'contexts/ResumeContext'
 
 const InputWrapper = styled.div`
   width: ${({ type }) => type === 'text' ? 'calc(50% - 1rem)' : '100%'};
@@ -47,7 +47,7 @@ const InputField = styled.input`
   color: var(--color-primary-900);
   background-color: var(--color-primary-200);
   letter-spacing: var(--spacing-small);
-  
+
   
   ::placeholder {
     opacity: 0.8;
@@ -66,23 +66,36 @@ const TextArea = styled(InputField)`
 
 
 
-const Input = ({ labelName, placeholderName, disabled, type }) => {
-  const [value, setValue] = useState('')
-  const changeValue = (e) => setValue(e.target.value)
+const Input = ({ key, labelName, placeholderName, disabled, type }) => {
+  // const [value, setValue] = useState('')
+  // const changeValue = (e) => setValue(e.target.value)
+
+  const [state, setValue] = useContext(ResumeContext)
+
+  const updateValue = e => {
+    e.preventDefault()
+    setValue((prevValues, props) => ({ ...prevValues, profile: { firstName: e.target.value } }))
+
+  }
 
   return (
     <>
       {
         <InputWrapper type={type} disabled={disabled}>
-          <label >
+          <label>
             <LabelName>{labelName}</LabelName>
             {type === 'text'
-              ? <InputField placeholder={placeholderName} onChange={changeValue}></InputField>
+              ? <InputField
+                spellCheck={false}
+                placeholder={placeholderName}
+                onChange={updateValue}
+              />
               : <TextArea
                 as='textarea'
+                spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}
-                onChange={changeValue}
+                onChange={setValue}
               />
             }
             <AiFillCheckCircle
@@ -94,7 +107,7 @@ const Input = ({ labelName, placeholderName, disabled, type }) => {
                   height: '5.8rem',
                   right: '1.5rem',
                   transition: 'opacity .4s',
-                  opacity: value ? '1' : '0',
+                  opacity: true ? '1' : '0',
                   pointerEvents: 'none',
                 }
               }

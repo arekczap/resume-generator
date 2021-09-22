@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 
+
 import HeaderBuilder from 'components/shared/HeaderBuilder'
 import Input from 'components/shared/Input'
 import PhotoInput from 'components/shared/PhotoInput'
-import EditSectionLink from 'components/shared/EditSectionLink'
 
-
-import { AboutSectionData } from 'data/AboutSectionData'
+import { aboutSectionData } from 'data/aboutSectionData'
 
 const BasicDataWrapper = styled.div`
   width: 100%;
@@ -16,16 +15,12 @@ const BasicDataWrapper = styled.div`
   flex-wrap: wrap;
 `
 
-const SectionSettingsWrapper = styled.div`
-  width: 100%;
-  margin: 1.2rem 0;
-`
-
 
 
 const About = (props) => {
-  const { basicData, photoData, extraData } = AboutSectionData
+  const { basicData, photoData, extraData } = aboutSectionData
   const { name, desc } = props.data
+
 
   const getInputFromData = (data) => {
     return data.map((item, index) => {
@@ -35,6 +30,8 @@ const About = (props) => {
         disabled={item.disabled}
         type={item.type}
         key={index}
+        sectionId={props.sectionId}
+        id={item.key}
       />
     })
   }
@@ -43,9 +40,6 @@ const About = (props) => {
     <>
       <HeaderBuilder name={name} content={desc} />
       <BasicDataWrapper>
-        <SectionSettingsWrapper>
-          <EditSectionLink>Edytuj sekcję</EditSectionLink>
-        </SectionSettingsWrapper>
         {getInputFromData(basicData)}
         <PhotoInput data={photoData} />
         {getInputFromData(extraData)}

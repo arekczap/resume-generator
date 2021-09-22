@@ -16,6 +16,7 @@ import Interested from 'components/builder/center/sections/Interested'
 
 const routesData = [
   {
+    key: 'profile',
     path: '/content/personalData',
     component: About,
   },
