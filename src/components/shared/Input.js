@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react'
-import styled from 'styled-components'
+import React, { memo, useContext } from 'react'
+import styled from 'styled-components/macro'
 import { AiFillCheckCircle } from "react-icons/ai"
 import { ResumeContext } from 'contexts/ResumeContext'
 
-const InputWrapper = styled.div`
+const Wrapper = styled.div`
   width: ${({ type }) => type === 'text' ? 'calc(50% - 1rem)' : '100%'};
   display: ${({ disabled }) => disabled === false ? 'block' : 'none'};
   position: relative;
@@ -66,38 +66,43 @@ const TextArea = styled(InputField)`
 
 
 
-const Input = ({ key, labelName, placeholderName, disabled, type }) => {
+const Input = ({ labelName, placeholderName, disabled, type, sectionId, id }) => {
   // const [value, setValue] = useState('')
   // const changeValue = (e) => setValue(e.target.value)
+  const [state, setState] = useContext(ResumeContext)
 
-  const [state, setValue] = useContext(ResumeContext)
 
+  console.log('rerendered')
   const updateValue = e => {
     e.preventDefault()
-    setValue((prevValues, props) => ({ ...prevValues, profile: { firstName: e.target.value } }))
-
+    setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))
   }
+
 
   return (
     <>
       {
-        <InputWrapper type={type} disabled={disabled}>
+        <Wrapper type={type} disabled={disabled}>
           <label>
             <LabelName>{labelName}</LabelName>
-            {type === 'text'
-              ? <InputField
+            {(type === 'text') && (
+              <InputField
                 spellCheck={false}
                 placeholder={placeholderName}
                 onChange={updateValue}
               />
-              : <TextArea
+            )}
+
+            {(type === 'textfield') && (
+              <TextArea
                 as='textarea'
                 spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}
-                onChange={setValue}
+                onChange={updateValue}
               />
-            }
+            )}
+
             <AiFillCheckCircle
               style={
                 {
@@ -107,13 +112,13 @@ const Input = ({ key, labelName, placeholderName, disabled, type }) => {
                   height: '5.8rem',
                   right: '1.5rem',
                   transition: 'opacity .4s',
-                  opacity: true ? '1' : '0',
+                  opacity: state[sectionId][id] !== '' ? '1' : '0',
                   pointerEvents: 'none',
                 }
               }
             />
           </label>
-        </InputWrapper >
+        </Wrapper >
 
       }
     </>

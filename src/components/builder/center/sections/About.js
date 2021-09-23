@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 
 import HeaderBuilder from 'components/shared/HeaderBuilder'
@@ -8,7 +8,7 @@ import PhotoInput from 'components/shared/PhotoInput'
 
 import { aboutSectionData } from 'data/aboutSectionData'
 
-const BasicDataWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -39,11 +39,11 @@ const About = (props) => {
   return (
     <>
       <HeaderBuilder name={name} content={desc} />
-      <BasicDataWrapper>
+      <Wrapper>
         {getInputFromData(basicData)}
         <PhotoInput data={photoData} />
         {getInputFromData(extraData)}
-      </BasicDataWrapper>
+      </Wrapper>
     </>
   )
 }

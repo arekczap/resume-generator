@@ -38,7 +38,7 @@ export const aboutSectionData =
   },
   extraData: [
     {
-      key: 'adress',
+      key: 'address',
       labelText: 'Adres',
       placeholderText: 'ul. Koralowa 3/43 \n21-100 Lublin',
       disabled: false,

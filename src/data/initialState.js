@@ -1,6 +1,6 @@
 export const initialState = {
   profile: {
-    firstName: "awdawd",
+    firstName: "",
     secondName: "",
     lastName: "",
     subtitle: "",

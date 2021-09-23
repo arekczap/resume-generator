@@ -1,15 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { initialState } from 'data/initialState'
 
-export const ResumeContext = React.createContext()
+const ResumeContext = React.createContext()
 
-
-export const ResumeContextProvider = ({ children }) => {
+const ResumeContextProvider = ({ children }) => {
   const [state, setState] = useState(initialState)
+
 
   return (
     <ResumeContext.Provider value={[state, setState]}>{children}</ResumeContext.Provider>
   )
+}
+
+
+
+
+export {
+  ResumeContext,
+  ResumeContextProvider,
+
 }
 
 

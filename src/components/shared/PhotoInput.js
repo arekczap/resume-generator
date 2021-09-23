@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { BsPersonPlusFill } from "react-icons/bs"
 
 
-const MainWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   position: relative;
   margin-top: 20rem;
@@ -18,7 +18,7 @@ const MainWrapper = styled.div`
   padding: 1.2rem 1.5rem;
 `
 
-const PhotoUpdateFieldWrapper = styled.div`
+const UpdateFieldWrapper = styled.div`
   min-width: 6rem;
   max-width: 6rem;
   width: 6rem;
@@ -38,7 +38,7 @@ const PhotoUpdateFieldWrapper = styled.div`
   }
 `
 
-const UploadImageFieldLabel = styled.label`
+const Label = styled.label`
   width: 100%;
   height: 100%;
   display: flex;
@@ -47,7 +47,7 @@ const UploadImageFieldLabel = styled.label`
   cursor: pointer;
 `
 
-const UploadImageFieldInput = styled.input.attrs(
+const UploadInput = styled.input.attrs(
   {
     type: 'file',
     autocomplete: 'off',
@@ -84,9 +84,9 @@ const PhotoInput = (props) => {
 
   return (
     <>
-      <MainWrapper>
-        <PhotoUpdateFieldWrapper>
-          <UploadImageFieldLabel htmlFor={'imgFile'}>
+      <Wrapper>
+        <UpdateFieldWrapper>
+          <Label htmlFor={'imgFile'}>
             <BsPersonPlusFill style={
               {
                 width: '70%',
@@ -95,9 +95,9 @@ const PhotoInput = (props) => {
                 fill: 'var(--color-primary-900)',
               }
             } />
-          </UploadImageFieldLabel>
-          <UploadImageFieldInput id={'imgFile'} />
-        </PhotoUpdateFieldWrapper>
+          </Label>
+          <UploadInput id={'imgFile'} />
+        </UpdateFieldWrapper>
         <TextContentWrapper>
           <HeaderText>{headerText}</HeaderText>
           <ul>
@@ -108,7 +108,7 @@ const PhotoInput = (props) => {
             }
           </ul>
         </TextContentWrapper>
-      </MainWrapper>
+      </Wrapper>
     </>
   )
 }

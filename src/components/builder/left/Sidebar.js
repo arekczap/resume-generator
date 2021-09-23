@@ -1,13 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import siteLogo from 'assets/logo.png'
 
-import DownloadResume from 'components/builder/left/DownloadResume'
+// import DownloadResume from 'components/builder/left/DownloadResume'
 import { sidebarData } from 'data/sidebarData'
 import SubMenu from 'components/builder/left/SubMenu'
 
 
-const LeftSideBarWrapper = styled.div`
+const Wrapper = styled.div`
   width: 22rem;
   background-color: var(--color-primary-50);
   height: 100vh;
@@ -35,7 +35,7 @@ const NavWrap = styled.div`
 `
 
 const LeftSideBar = () => (
-  <LeftSideBarWrapper>
+  <Wrapper>
     <LogoImage src={siteLogo} >
     </LogoImage>
     <NavWrap>
@@ -44,7 +44,7 @@ const LeftSideBar = () => (
       })}
     </NavWrap>
     {/* <DownloadResume></DownloadResume> */}
-  </LeftSideBarWrapper >
+  </Wrapper >
 )
 
 export default LeftSideBar

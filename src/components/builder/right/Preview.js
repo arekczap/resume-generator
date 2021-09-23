@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
 
 
-const SectionWrapper = styled.div`
+const Wrapper = styled.div`
 width: 100%;
 height: 100vh;
 background-color: white;
@@ -11,14 +11,16 @@ background-color: white;
 
 
 const Preview = () => {
-  // const [value, setValue] = useContext(ResumeContext)
+  const [state] = useContext(ResumeContext)
 
   return (
     <>
-      <SectionWrapper>
-        {/* <h1>{value.profile.firstName}</h1> */}
+      <Wrapper>
+        <div>{
+          JSON.stringify(state, null, 1)
+        }</div>
 
-      </SectionWrapper>
+      </Wrapper>
     </>
   )
 }
