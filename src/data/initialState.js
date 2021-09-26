@@ -1,5 +1,6 @@
 export const initialState = {
   profile: {
+    sectionName: "Dane osobowe",
     firstName: "",
     secondName: "",
     lastName: "",

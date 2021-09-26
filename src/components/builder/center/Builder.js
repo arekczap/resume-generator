@@ -16,6 +16,9 @@ height: 100%;
 padding: 2rem;
 overflow: auto;
 margin: 0.5rem;
+display: flex;
+flex-direction: column;
+align-items: center;
 
 ::-webkit-scrollbar {
   width: 10px;

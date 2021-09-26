@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState } from 'react'
 import { initialState } from 'data/initialState'
 
 const ResumeContext = React.createContext()

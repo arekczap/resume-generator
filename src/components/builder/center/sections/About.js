@@ -16,7 +16,6 @@ const Wrapper = styled.div`
 `
 
 
-
 const About = (props) => {
   const { basicData, photoData, extraData } = aboutSectionData
   const { name, desc } = props.data
@@ -27,7 +26,6 @@ const About = (props) => {
       return <Input
         labelName={item.labelText}
         placeholderName={item.placeholderText}
-        disabled={item.disabled}
         type={item.type}
         key={index}
         sectionId={props.sectionId}

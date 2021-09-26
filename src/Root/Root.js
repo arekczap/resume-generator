@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router } from 'react-router-dom'
 import GlobalStyle from 'theme/GlobalStyle'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { ResumeContextProvider } from 'contexts/ResumeContext'
 
 

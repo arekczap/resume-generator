@@ -1,11 +1,11 @@
-import React, { memo, useContext } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 import { AiFillCheckCircle } from "react-icons/ai"
 import { ResumeContext } from 'contexts/ResumeContext'
 
 const Wrapper = styled.div`
-  width: ${({ type }) => type === 'text' ? 'calc(50% - 1rem)' : '100%'};
-  display: ${({ disabled }) => disabled === false ? 'block' : 'none'};
+  width: ${({ type, id }) => type === 'text' && id !== 'sectionName' ? 'calc(50% - 1rem)' : '100%'};
+  display:  'block';
   position: relative;
   margin-top: 20rem;
   background-color: var(--color-primary-200);
@@ -66,26 +66,31 @@ const TextArea = styled(InputField)`
 
 
 
-const Input = ({ labelName, placeholderName, disabled, type, sectionId, id }) => {
-  // const [value, setValue] = useState('')
-  // const changeValue = (e) => setValue(e.target.value)
+const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
   const [state, setState] = useContext(ResumeContext)
 
-
-  console.log('rerendered')
   const updateValue = e => {
     e.preventDefault()
     setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))
   }
 
-
   return (
     <>
       {
-        <Wrapper type={type} disabled={disabled}>
+        <Wrapper type={type} id={id} >
           <label>
             <LabelName>{labelName}</LabelName>
-            {(type === 'text') && (
+
+            {(type === 'text' && id === 'sectionName') && (
+              <InputField
+                spellCheck={false}
+                placeholder={placeholderName}
+                onChange={updateValue}
+                value={state[sectionId][id]}
+              />
+            )}
+
+            {(type === 'text' && id !== 'sectionName') && (
               <InputField
                 spellCheck={false}
                 placeholder={placeholderName}
@@ -112,7 +117,7 @@ const Input = ({ labelName, placeholderName, disabled, type, sectionId, id }) =>
                   height: '5.8rem',
                   right: '1.5rem',
                   transition: 'opacity .4s',
-                  opacity: state[sectionId][id] !== '' ? '1' : '0',
+                  opacity: state[sectionId][id] !== '' && id !== 'sectionName' ? '1' : '0',
                   pointerEvents: 'none',
                 }
               }
