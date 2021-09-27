@@ -14,4 +14,7 @@ export const initialState = {
     linkedinLink: "",
     githubLink: "",
   },
+  experience: {
+    sectionName: "Doświadczenie",
+  }
 }

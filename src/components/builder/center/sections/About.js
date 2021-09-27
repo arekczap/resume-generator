@@ -15,7 +15,6 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 `
 
-
 const About = (props) => {
   const { basicData, photoData, extraData } = aboutSectionData
   const { name, desc } = props.data

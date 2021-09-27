@@ -74,6 +74,8 @@ const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
     setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))
   }
 
+  console.log(sectionId, id)
+
   return (
     <>
       {

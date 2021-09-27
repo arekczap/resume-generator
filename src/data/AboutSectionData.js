@@ -13,7 +13,6 @@ export const aboutSectionData =
       labelText: 'Imię',
       placeholderText: 'Jan',
       type: 'text',
-
     },
     {
       key: 'secondName',
