@@ -8,6 +8,7 @@ width: 70%;
 height: 100vh;
 display: flex;
 flex-direction: column;
+
 background-color: var(--color-primary-100);
 `
 
@@ -42,9 +43,7 @@ const Builder = () => {
       <Wrapper >
         <BuilderWrapper>
           <Routes />
-
         </BuilderWrapper>
-        {/* <SwitchFieldSectionWrapper /> */}
       </Wrapper>
     </>
   )

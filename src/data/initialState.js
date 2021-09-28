@@ -16,5 +16,6 @@ export const initialState = {
   },
   experience: {
     sectionName: "Doświadczenie",
+    items: []
   }
 }

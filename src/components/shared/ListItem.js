@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
+
 import Switch from '@mui/material/Switch'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 
-
 import { BiDotsVerticalRounded as DotsVertical } from 'react-icons/bi'
 import { BsChevronUp } from 'react-icons/bs'
 import { BsChevronDown } from 'react-icons/bs'
-import { fontSize } from '@mui/system'
 
 
 const Wrapper = styled.div`
@@ -18,10 +17,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-
-     &:first-child {
-        border-top: none;
-    }
+  &:first-child {
+    border-top: none;
+  }
 `
 
 const ItemText = styled.span`
@@ -33,7 +31,6 @@ const ItemText = styled.span`
 const ButtonsWrapper = styled.div`
   height: 100%;
   width: 20rem;
-  border-left: 1px solid white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,8 +49,6 @@ const MaterialMenuItem = styled(MenuItem)(({ color }) => ({
   fontFamily: 'Montserrat !important',
   color: `${color === 'red' ? 'red !important' : 'white'}`,
 }))
-
-
 
 const MoveIconsWrapper = styled.div`
   margin-bottom: 0.5rem;
@@ -93,7 +88,7 @@ const ListItem = () => {
           onClose={handleClose}
         >
           <MoveIconsWrapper>
-            <MaterialMenuItem className={'aaa'} onClick={handleClose}>
+            <MaterialMenuItem onClick={handleClose}>
               <BsChevronUp disabled size="2.5rem" />
             </MaterialMenuItem>
             <MaterialMenuItem onClick={handleClose}>
