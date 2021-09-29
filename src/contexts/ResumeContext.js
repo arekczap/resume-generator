@@ -18,7 +18,6 @@ const ResumeContextProvider = ({ children }) => {
 export {
   ResumeContext,
   ResumeContextProvider,
-
 }
 
 

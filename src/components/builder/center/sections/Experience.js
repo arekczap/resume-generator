@@ -9,11 +9,12 @@ import Input from 'components/shared/Input'
 
 import BasicModal from 'modals/BasicModal'
 
+
 import { experienceSectionData } from 'data/experienceSectionData'
 
 const WrapperContent = styled.div`
   width: 95%;
-  /* height: 50%; */
+
   display: flex;
   flex-wrap: wrap;
   border: 1px solid var(--color-primary-300);
@@ -31,16 +32,12 @@ const ButtonWrapper = styled.div`
   user-select: none;
 `
 
-
-
-
-
 const Experience = (props) => {
   const { name, desc } = props.data
   const { key, labelText, placeholderText, type } = experienceSectionData.inputData
 
   const [showModal, setShowModal] = useState(false)
-  const toggleShowModal = () => setShowModal(prev => !prev)
+
 
   return (
     <>
@@ -59,11 +56,14 @@ const Experience = (props) => {
         <ListItem></ListItem>
       </WrapperContent>
 
-      <ButtonWrapper onClick={toggleShowModal}>
-        <AddItemButton>{'Dodaj pozycję'}</AddItemButton>
-        <BasicModal showModal={showModal} setShowModal={setShowModal} />
+      <ButtonWrapper >
+        <AddItemButton onClick={() => setShowModal(prev => !prev)}>{'Dodaj pozycję'}</AddItemButton>
+        <BasicModal
+          childrenType={props.sectionId}
+          setShowModal={setShowModal}
+          showModal={showModal}
+        />
       </ButtonWrapper>
-
 
 
 

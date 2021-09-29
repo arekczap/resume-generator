@@ -54,7 +54,7 @@ const DropDownLink = styled(Link)`
 
 const SubMenu = ({ item }) => {
   const [subnav, sideBar] = useState(true)
-  const toogleSidebar = () => sideBar(!subnav)
+  const toogleSidebar = () => sideBar(prev => !prev)
 
 
   return (

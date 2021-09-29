@@ -69,6 +69,7 @@ const TextArea = styled(InputField)`
 const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
   const [state, setState] = useContext(ResumeContext)
 
+
   const updateValue = e => {
     e.preventDefault()
     setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))

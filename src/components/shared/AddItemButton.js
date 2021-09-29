@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 
-const Button = styled.button`
+const AddItemButton = styled.button`
   padding: 1rem 3rem;
   background-color: transparent;
   border: 1px solid var(--color-primary-700);
@@ -14,15 +13,5 @@ const Button = styled.button`
   }
 `
 
-
-const AddItemButton = (props) => {
-  return (
-    <Button>
-      {
-        props.children
-      }
-    </Button>
-  )
-}
 
 export default AddItemButton
