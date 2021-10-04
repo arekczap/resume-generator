@@ -79,8 +79,7 @@ const HintText = styled.li`
 `
 
 
-const PhotoInput = (props) => {
-  const { headerText, hints } = props.data
+const PhotoInput = ({ headerText, hints }) => {
 
   return (
     <>

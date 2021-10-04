@@ -1,10 +1,10 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components/macro'
 import { AiFillCheckCircle } from "react-icons/ai"
 import { ResumeContext } from 'contexts/ResumeContext'
 
 const Wrapper = styled.div`
-  width: ${({ type, id }) => type === 'text' && id !== 'sectionName' ? 'calc(50% - 1rem)' : '100%'};
+  width: ${({ fullWidth }) => fullWidth ? '100%' : 'calc(50% - 1rem)'};
   display:  'block';
   position: relative;
   margin-top: 20rem;
@@ -21,7 +21,6 @@ const Wrapper = styled.div`
     box-shadow: 0 0 3px var(--color-primary-700);
   }
 `
-
 
 const LabelName = styled.div`
   position: absolute;
@@ -48,7 +47,6 @@ const InputField = styled.input`
   background-color: var(--color-primary-200);
   letter-spacing: var(--spacing-small);
 
-  
   ::placeholder {
     opacity: 0.8;
   }
@@ -66,37 +64,40 @@ const TextArea = styled(InputField)`
 
 
 
-const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
+const Input = ({
+  labelName,
+  placeholderName,
+  type,
+  sectionId,
+  id,
+  fullWidth
+}) => {
   const [state, setState] = useContext(ResumeContext)
+  const [inputValue, setInputValue] = useState('')
 
 
-  const updateValue = e => {
+  const handleUpdateValue = e => {
     e.preventDefault()
+    setInputValue(e.target.value)
     setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))
   }
+
   return (
     <>
       {
-        <Wrapper type={type} id={id} >
+        <Wrapper type={type} id={id} fullWidth={fullWidth} >
           <label>
             <LabelName>{labelName}</LabelName>
 
-            {(type === 'text' && id === 'sectionName') && (
+            {(type === 'text') && (
               <InputField
                 spellCheck={false}
                 placeholder={placeholderName}
-                onChange={updateValue}
-                value={state[sectionId][id]}
+                onChange={id ? handleUpdateValue : null}
+              // value={state[sectionId][id]}
               />
             )}
 
-            {(type === 'text' && id !== 'sectionName') && (
-              <InputField
-                spellCheck={false}
-                placeholder={placeholderName}
-                onChange={updateValue}
-              />
-            )}
 
             {(type === 'textfield') && (
               <TextArea
@@ -104,7 +105,7 @@ const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
                 spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}
-                onChange={updateValue}
+                onChange={id ? handleUpdateValue : null}
               />
             )}
 
@@ -116,8 +117,8 @@ const Input = ({ labelName, placeholderName, type, sectionId, id }) => {
                   width: '2rem',
                   height: '5.8rem',
                   right: '1.5rem',
+                  opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
                   transition: 'opacity .4s',
-                  opacity: state[sectionId][id] !== '' && id !== 'sectionName' ? '1' : '0',
                   pointerEvents: 'none',
                 }
               }

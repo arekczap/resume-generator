@@ -4,7 +4,7 @@ import ExperienceModal from 'modals/sections/ExperienceModal'
 
 export const modalsData = [
   {
-    key: 'experience',
+    modalName: 'experience',
     component: ExperienceModal
   }
   // profile: AboutModal,

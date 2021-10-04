@@ -1,6 +1,6 @@
 import styled from 'styled-components/macro'
 
-const AddItemButton = styled.button`
+const ModalButton = styled.button`
   padding: 1rem 3rem;
   background-color: transparent;
   border: 1px solid var(--color-primary-700);
@@ -14,4 +14,4 @@ const AddItemButton = styled.button`
 `
 
 
-export default AddItemButton
+export default ModalButton

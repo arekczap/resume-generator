@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
 
-import AddItemButton from 'components/shared/AddItemButton'
+import ModalButton from 'components/shared/AddItemButton'
 import HeaderBuilder from 'components/shared/HeaderBuilder'
 import ListItem from 'components/shared/ListItem'
 import Input from 'components/shared/Input'
@@ -38,7 +38,7 @@ const Experience = (props) => {
 
   const [showModal, setShowModal] = useState(false)
 
-
+  // console.log(props.sectionId)
   return (
     <>
       <HeaderBuilder name={name} content={desc} />
@@ -48,6 +48,7 @@ const Experience = (props) => {
         type={type}
         sectionId={props.sectionId}
         id={key}
+        fullWidth={true}
       />
       <WrapperContent>
 
@@ -57,7 +58,7 @@ const Experience = (props) => {
       </WrapperContent>
 
       <ButtonWrapper >
-        <AddItemButton onClick={() => setShowModal(prev => !prev)}>{'Dodaj pozycję'}</AddItemButton>
+        <ModalButton onClick={() => setShowModal(prev => !prev)}>{'Dodaj pozycję'}</ModalButton>
         <BasicModal
           childrenType={props.sectionId}
           setShowModal={setShowModal}
