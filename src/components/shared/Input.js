@@ -70,7 +70,9 @@ const Input = ({
   type,
   sectionId,
   id,
-  fullWidth
+  fullWidth,
+  onChange,
+  name
 }) => {
   const [state, setState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
@@ -93,7 +95,8 @@ const Input = ({
               <InputField
                 spellCheck={false}
                 placeholder={placeholderName}
-                onChange={id ? handleUpdateValue : null}
+                onChange={id ? handleUpdateValue : onChange}
+                name={name}
               // value={state[sectionId][id]}
               />
             )}
@@ -105,7 +108,8 @@ const Input = ({
                 spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}
-                onChange={id ? handleUpdateValue : null}
+                onChange={id ? handleUpdateValue : onChange}
+                name={name}
               />
             )}
 

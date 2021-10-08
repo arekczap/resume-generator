@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import Box from '@mui/material/Box'
@@ -36,8 +36,20 @@ const BasicModal = ({
   setShowModal
 }) => {
   const handleClose = () => setShowModal(false)
+  const [positionItemData, setDataPosition] = useState()
+
+  const handlePositionItemAdd = () => {
+    handleClose()
+    console.log('dodaję pozycje do listy')
+    console.log(positionItemData)
+    console.log('czyszcze state')
+    setDataPosition({})
+  }
+
+
 
   return (
+
     <>
       <Modal
         open={showModal}
@@ -47,16 +59,18 @@ const BasicModal = ({
       >
         <Box sx={style}>
           {
-            modalsData.map((item) => {
-              if (item.modalName === childrenType) return <item.component
+            modalsData.map((section) => {
+              if (section.modalName === childrenType) return <section.component
                 type={childrenType}
-                key={item}
+                key={section}
+                addPositionFn={posItem => setDataPosition(posItem)}
+                showModalState={showModal}
               />
             })
           }
           <ButtonsWrapper>
             <ModalButton onClick={handleClose}>{'Anuluj'}</ModalButton>
-            <ModalButton>{'Dodaj stanowisko'}</ModalButton>
+            <ModalButton onClick={handlePositionItemAdd}>{'Dodaj stanowisko'}</ModalButton>
           </ButtonsWrapper>
 
         </Box>
