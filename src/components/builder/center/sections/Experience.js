@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd"
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 import ModalButton from 'components/shared/AddItemButton'
 import HeaderBuilder from 'components/shared/HeaderBuilder'
@@ -8,7 +8,6 @@ import ListItem from 'components/shared/ListItem'
 import Input from 'components/shared/Input'
 
 import BasicModal from 'modals/BasicModal'
-
 
 import { experienceSectionData } from 'data/experienceSectionData'
 
@@ -22,7 +21,6 @@ const WrapperContent = styled.div`
   cursor: drag;
 `
 
-
 const ButtonWrapper = styled.div`
   /* width: 95%; */
   margin-top: 2rem;
@@ -34,7 +32,8 @@ const ButtonWrapper = styled.div`
 
 const Experience = (props) => {
   const { name, desc } = props.data
-  const { key, labelText, placeholderText, type } = experienceSectionData.inputData
+  const { key, labelText, placeholderText, type } =
+    experienceSectionData.inputData
 
   const [showModal, setShowModal] = useState(false)
 
@@ -51,37 +50,21 @@ const Experience = (props) => {
         fullWidth={true}
       />
       <WrapperContent>
-
         <ListItem></ListItem>
         <ListItem></ListItem>
         <ListItem></ListItem>
       </WrapperContent>
 
-      <ButtonWrapper >
-        <ModalButton onClick={() => setShowModal(prev => !prev)}>{'Dodaj pozycję'}</ModalButton>
+      <ButtonWrapper>
+        <ModalButton onClick={() => setShowModal((prev) => !prev)}>
+          {'Dodaj pozycję'}
+        </ModalButton>
         <BasicModal
           childrenType={props.sectionId}
           setShowModal={setShowModal}
           showModal={showModal}
         />
       </ButtonWrapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
       {/* <DragDropContext onDragEnd={onDragEnd}>
         <Droppable droppableId="droppable-1">
