@@ -12,24 +12,17 @@ const initialValues = {
   summary: '',
 }
 
-
-
 const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
   const [state, setState] = React.useState(initialValues)
-
-
-
 
   const handleChange = (evt) => {
     const value = evt.target.value
     setState({
       ...state,
-      [evt.target.name]: value
+      [evt.target.name]: value,
     })
     addPositionFn(state)
   }
-
-
 
   return (
     <>
@@ -52,7 +45,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name='position'
+        name="position"
         value={state.position}
         onChange={handleChange}
       />
@@ -63,7 +56,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name='city'
+        name="city"
         value={state.city}
         onChange={handleChange}
       />
@@ -74,11 +67,10 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name='startDate'
+        name="startDate"
         value={state.startDate}
         onChange={handleChange}
       />
-
 
       <Input
         labelName={'Data zakończenia'}
@@ -86,23 +78,22 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name='endDate'
+        name="endDate"
         value={state.endDate}
         onChange={handleChange}
       />
 
       <Input
-        labelName='Opis stanowiska'
-        placeholderName=''
+        labelName="Opis stanowiska"
+        placeholderName=""
         type={'textfield'}
         sectionId={childrenType}
         fullWidth={true}
-        name='summary'
+        name="summary"
         value={state.summary}
         onChange={handleChange}
       />
     </>
-
   )
 }
 

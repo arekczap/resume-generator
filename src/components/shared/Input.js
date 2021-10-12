@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components/macro'
-import { AiFillCheckCircle } from "react-icons/ai"
+import { AiFillCheckCircle } from 'react-icons/ai'
 import { ResumeContext } from 'contexts/ResumeContext'
 
 const Wrapper = styled.div`
-  width: ${({ fullWidth }) => fullWidth ? '100%' : 'calc(50% - 1rem)'};
-  display:  'block';
+  width: ${({ fullWidth }) => (fullWidth ? '100%' : 'calc(50% - 1rem)')};
+  display: 'block';
   position: relative;
   margin-top: 20rem;
   background-color: var(--color-primary-200);
@@ -24,15 +24,18 @@ const Wrapper = styled.div`
 
 const LabelName = styled.div`
   position: absolute;
-  padding: .8rem 0 0 2rem;
+  width: 100%;
+  height: 3.5rem;
+  padding: 0.8rem 0 0 2rem;
   font-size: 1.3rem;
   color: var(--color-primary-600);
   z-index: 1;
+  cursor: text;
 
   ::placeholder {
     color: var(--color-primary-800);
   }
-  `
+`
 
 const InputField = styled.input`
   width: 100%;
@@ -55,14 +58,12 @@ const InputField = styled.input`
 const TextArea = styled(InputField)`
   resize: none;
   height: 6rem;
-  margin-top: 3rem;
+  margin-top: 3.5rem;
   padding: 0.2rem 5rem 1rem 2.2rem;
   background-color: var(--color-primary-200);
   color: var(--color-primary-900);
-  line-height: 2rem;
+  line-height: 1.5rem;
 `
-
-
 
 const Input = ({
   labelName,
@@ -72,39 +73,46 @@ const Input = ({
   id,
   fullWidth,
   onChange,
-  name
+  name,
 }) => {
   const [state, setState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
 
-
-  const handleUpdateValue = e => {
+  const handleUpdateValue = (e) => {
     e.preventDefault()
     setInputValue(e.target.value)
-    setState((prevState) => ({ ...prevState, [sectionId]: { ...prevState[sectionId], [id]: e.target.value } }))
+    setState((prevState) => ({
+      ...prevState,
+      [sectionId]: { ...prevState[sectionId], [id]: e.target.value },
+    }))
+  }
+
+  const autoResizeTextArea = (e) => {
+    e.target.style.height = 'auto'
+    e.target.style.height = e.target.scrollHeight + 'px'
   }
 
   return (
     <>
       {
-        <Wrapper type={type} id={id} fullWidth={fullWidth} >
+        <Wrapper type={type} id={id} fullWidth={fullWidth}>
           <label>
             <LabelName>{labelName}</LabelName>
 
-            {(type === 'text') && (
+            {type === 'text' && (
               <InputField
                 spellCheck={false}
                 placeholder={placeholderName}
                 onChange={id ? handleUpdateValue : onChange}
                 name={name}
-              // value={state[sectionId][id]}
+                // value={state[sectionId][id]}
               />
             )}
 
-
-            {(type === 'textfield') && (
+            {type === 'textfield' && (
               <TextArea
-                as='textarea'
+                as="textarea"
+                onInput={autoResizeTextArea}
                 spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}
@@ -114,22 +122,19 @@ const Input = ({
             )}
 
             <AiFillCheckCircle
-              style={
-                {
-                  position: 'absolute',
-                  fill: 'var(--color-primary-900)',
-                  width: '2rem',
-                  height: '5.8rem',
-                  right: '1.5rem',
-                  opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
-                  transition: 'opacity .4s',
-                  pointerEvents: 'none',
-                }
-              }
+              style={{
+                position: 'absolute',
+                fill: 'var(--color-primary-900)',
+                width: '2rem',
+                height: '5.8rem',
+                right: '1.5rem',
+                opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
+                transition: 'opacity .4s',
+                pointerEvents: 'none',
+              }}
             />
           </label>
-        </Wrapper >
-
+        </Wrapper>
       }
     </>
   )

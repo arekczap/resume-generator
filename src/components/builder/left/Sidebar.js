@@ -3,9 +3,8 @@ import styled from 'styled-components/macro'
 import siteLogo from 'assets/logo.png'
 
 // import DownloadResume from 'components/builder/left/DownloadResume'
-import { sidebarData } from 'data/sidebarData'
+import { sidebarData } from 'data/SidebarData'
 import SubMenu from 'components/builder/left/SubMenu'
-
 
 const Wrapper = styled.div`
   width: 22rem;
@@ -30,21 +29,20 @@ const NavWrap = styled.div`
   overflow: auto;
 
   ::-webkit-scrollbar {
-  display: none;
+    display: none;
   }
 `
 
 const LeftSideBar = () => (
   <Wrapper>
-    <LogoImage src={siteLogo} >
-    </LogoImage>
+    <LogoImage src={siteLogo}></LogoImage>
     <NavWrap>
       {sidebarData.map((item, index) => {
         return <SubMenu item={item} key={index} />
       })}
     </NavWrap>
     {/* <DownloadResume></DownloadResume> */}
-  </Wrapper >
+  </Wrapper>
 )
 
 export default LeftSideBar

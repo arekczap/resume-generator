@@ -2,9 +2,7 @@ import { Switch, Route } from 'react-router-dom'
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 
-
-
-import { sidebarData } from 'data/sidebarData'
+import { sidebarData } from 'data/SidebarData'
 import routesData from './RoutesData'
 
 const Routes = () => {
@@ -18,7 +16,7 @@ const Routes = () => {
         if (item.path === location.pathname) {
           setData({
             name: item.title,
-            desc: item.headingContent
+            desc: item.headingContent,
           })
         }
       })
@@ -28,22 +26,19 @@ const Routes = () => {
   return (
     <>
       <Switch>
-        {
-          routesData.map((item, index) => {
-            return <Route
+        {routesData.map((item, index) => {
+          return (
+            <Route
               path={item.path}
               render={() => {
-                return <item.component
-                  data={elementData}
-                  sectionId={item.key}
-                />
-              }
-              }
+                return (
+                  <item.component data={elementData} sectionId={item.key} />
+                )
+              }}
               key={index}
-
             />
-          })
-        }
+          )
+        })}
       </Switch>
     </>
   )
