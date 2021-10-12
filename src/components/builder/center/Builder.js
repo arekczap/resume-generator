@@ -1,43 +1,50 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useLocation } from 'react-router'
+import React from 'react'
+import styled from 'styled-components/macro'
 
 import Routes from 'components/builder/center/sections/routes/Routes'
 
-const SectionWrapper = styled.div`
-width: 100%;
+const Wrapper = styled.div`
+width: 70%;
 height: 100vh;
 display: flex;
 flex-direction: column;
 
+background-color: var(--color-primary-100);
 `
 
-const SectionBuilderWrapper = styled.div`
+const BuilderWrapper = styled.div`
 height: 100%;
-padding: 3rem;
+padding: 2rem;
+overflow: auto;
+margin: 0.5rem;
+display: flex;
+flex-direction: column;
+align-items: center;
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary-400);
+  border-radius: 5px;
+}
 `
 
-const SwitchFieldSectionWrapper = styled.div`
-  height: 9rem;
-  box-shadow: 0 -.4rem 1.2rem rgba(0,0,0,.5);
-`
+// const SwitchFieldWrapper = styled.div`
+//   height: 9rem;
+//   box-shadow: 0 -.4rem 1.2rem rgba(0,0,0,.5);
+// `
 
 
 const Builder = () => {
-
-
-
-
   return (
     <>
-      <SectionWrapper >
-        <SectionBuilderWrapper>
+      <Wrapper >
+        <BuilderWrapper>
           <Routes />
-
-        </SectionBuilderWrapper>
-        <SwitchFieldSectionWrapper />
-      </SectionWrapper>
+        </BuilderWrapper>
+      </Wrapper>
     </>
   )
 }

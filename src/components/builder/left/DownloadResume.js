@@ -1,6 +1,6 @@
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
-const DownloadWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   padding: 2rem 2.5rem;
   box-shadow: 0 -.4rem 1.2rem rgba(0,0,0,.3);
@@ -11,7 +11,7 @@ width: 100%;
 font-size: 2.2rem;
 font-weight: 400;
 padding: 1rem 1rem;
-background-color: #5c5c5c;
+background-color: var(--color-secondary);
 color: white;
 border-radius: 5px;
 border: none;
@@ -24,11 +24,9 @@ transition: background-color .4s;
 `
 
 const DownloadResume = () => (
-  <>
-    <DownloadWrapper>
-      <DownloadButton>Pobierz Twoje CV</DownloadButton>
-    </DownloadWrapper>
-  </>
+  <Wrapper>
+    <DownloadButton>Pobierz Twoje CV</DownloadButton>
+  </Wrapper>
 )
 
 

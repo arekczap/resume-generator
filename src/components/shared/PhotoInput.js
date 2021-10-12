@@ -1,13 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { BsPersonPlusFill } from "react-icons/bs"
 
 
-const MainWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
   position: relative;
   margin-top: 20rem;
-  background-color: var(--color-neutral);
+  background-color: var(--color-primary-200);
   border-radius: 7px;
   letter-spacing: var(--spacing-small);
   user-select: none;
@@ -18,14 +18,14 @@ const MainWrapper = styled.div`
   padding: 1.2rem 1.5rem;
 `
 
-const PhotoUpdateFieldWrapper = styled.div`
+const UpdateFieldWrapper = styled.div`
   min-width: 6rem;
   max-width: 6rem;
   width: 6rem;
   min-height: 6rem;
   max-height: 6rem;
   height: 6rem;
-  border: 1px dashed black;
+  border: 1px dashed var(--color-primary-900);
   border-radius: 7px;
   transition: background-color 0.2s;
   cursor: pointer;
@@ -34,11 +34,11 @@ const PhotoUpdateFieldWrapper = styled.div`
   align-items: center;
  
   :hover {
-    background-color: rgba(224, 224, 224, 0.7);
+    background-color: var(--color-primary-300);
   }
 `
 
-const UploadImageFieldLabel = styled.label`
+const Label = styled.label`
   width: 100%;
   height: 100%;
   display: flex;
@@ -47,7 +47,7 @@ const UploadImageFieldLabel = styled.label`
   cursor: pointer;
 `
 
-const UploadImageFieldInput = styled.input.attrs(
+const UploadInput = styled.input.attrs(
   {
     type: 'file',
     autocomplete: 'off',
@@ -62,11 +62,11 @@ const UploadImageFieldInput = styled.input.attrs(
 
 const TextContentWrapper = styled.div`
   margin-left: 2rem;
+  color: var(--color-primary-600);
 `
 
 const HeaderText = styled.h2`
   font-size: 1.4rem;
-  
 `
 
 const HintText = styled.li`
@@ -74,36 +74,40 @@ const HintText = styled.li`
  margin: 0.5rem 0 0 2rem;
 
  ::marker {
-   color: black;
   font-size: 1.5rem;
  }
 `
 
 
-const PhotoInput = () => {
+const PhotoInput = ({ headerText, hints }) => {
+
   return (
     <>
-      <MainWrapper>
-        <PhotoUpdateFieldWrapper>
-          <UploadImageFieldLabel for={'imgFile'}>
+      <Wrapper>
+        <UpdateFieldWrapper>
+          <Label htmlFor={'imgFile'}>
             <BsPersonPlusFill style={
               {
                 width: '70%',
                 height: '70%',
                 opacity: '0.7',
+                fill: 'var(--color-primary-900)',
               }
             } />
-          </UploadImageFieldLabel>
-          <UploadImageFieldInput id={'imgFile'} />
-        </PhotoUpdateFieldWrapper>
+          </Label>
+          <UploadInput id={'imgFile'} />
+        </UpdateFieldWrapper>
         <TextContentWrapper>
-          <HeaderText>{'Dodaj swoje zdjęcie'}</HeaderText>
+          <HeaderText>{headerText}</HeaderText>
           <ul>
-            <HintText>{'Wybierz wyraźne zdjęcie'}</HintText>
-            <HintText>{'Fotografia powinna mieć jednolite tło'}</HintText>
+            {
+              hints.map((item, index) => {
+                return <HintText key={index}>{item}</HintText>
+              })
+            }
           </ul>
         </TextContentWrapper>
-      </MainWrapper>
+      </Wrapper>
     </>
   )
 }

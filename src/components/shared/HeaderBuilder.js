@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 
-const HeaderWrapper = styled.header`
+const Wrapper = styled.header`
   width: 100%;
   border-bottom: 2px solid gray;
   color: white;
@@ -16,7 +16,7 @@ const Heading = styled.h2`
   padding-bottom: 1.5rem;
 `
 
-const HeaderContent = styled.span`
+const Content = styled.span`
   font-weight: 400;
   line-height: 2.3rem;
   font-size: 1.4rem;
@@ -26,16 +26,16 @@ const HeaderContent = styled.span`
 
 const HeaderBuilder = ({ name, content }) => {
   return (
-    <HeaderWrapper>
+    <Wrapper>
       {
         content
           ? <>
             <Heading big={false}>{name}</Heading>
-            <HeaderContent>{content}</HeaderContent>
+            <Content>{content}</Content>
           </>
           : <Heading big={true}>{name}</Heading>
       }
-    </HeaderWrapper >
+    </Wrapper >
   )
 }
 
