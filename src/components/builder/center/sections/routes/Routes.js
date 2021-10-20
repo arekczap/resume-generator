@@ -1,13 +1,15 @@
 import { Switch, Route } from 'react-router-dom'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useLocation } from 'react-router'
 
+import { ResumeContext } from 'contexts/ResumeContext'
 import { sidebarData } from 'data/SidebarData'
 import routesData from './RoutesData'
 
 const Routes = () => {
   const location = useLocation()
   const [elementData, setData] = useState({})
+  const [state] = useContext(ResumeContext)
 
   //set data header name, desc to builder component
   useEffect(() => {
@@ -32,7 +34,11 @@ const Routes = () => {
               path={item.path}
               render={() => {
                 return (
-                  <item.component data={elementData} sectionId={item.key} />
+                  <item.component
+                    stateData={state[item.key]}
+                    data={elementData}
+                    sectionId={item.key}
+                  />
                 )
               }}
               key={index}

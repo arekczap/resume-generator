@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+// import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
 
 import ModalButton from 'components/shared/AddItemButton'
 import HeaderBuilder from 'components/shared/HeaderBuilder'
@@ -13,7 +13,6 @@ import { experienceSectionData } from 'data/experienceSectionData'
 
 const WrapperContent = styled.div`
   width: 95%;
-
   display: flex;
   flex-wrap: wrap;
   border: 1px solid var(--color-primary-300);
@@ -21,8 +20,17 @@ const WrapperContent = styled.div`
   cursor: drag;
 `
 
+const EmptyWrapperContent = styled.div`
+  width: 100%;
+  height: 7.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-primary-600);
+  letter-spacing: 0.5px;
+`
+
 const ButtonWrapper = styled.div`
-  /* width: 95%; */
   margin-top: 2rem;
   display: flex;
   justify-content: flex-end;
@@ -34,10 +42,11 @@ const Experience = (props) => {
   const { name, desc } = props.data
   const { key, labelText, placeholderText, type } =
     experienceSectionData.inputData
+  const { items: dataItems, sectionName } = props.stateData
+
+  console.log(sectionName)
 
   const [showModal, setShowModal] = useState(false)
-
-  // console.log(props.sectionId)
   return (
     <>
       <HeaderBuilder name={name} content={desc} />
@@ -50,9 +59,13 @@ const Experience = (props) => {
         fullWidth={true}
       />
       <WrapperContent>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
-        <ListItem></ListItem>
+        {dataItems[0] ? (
+          dataItems.map((values, i) => (
+            <ListItem values={values} key={i}></ListItem>
+          ))
+        ) : (
+          <EmptyWrapperContent>{'Lista jest pusta'}</EmptyWrapperContent>
+        )}
       </WrapperContent>
 
       <ButtonWrapper>

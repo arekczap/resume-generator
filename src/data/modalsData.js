@@ -1,17 +1,13 @@
 import ExperienceModal from 'modals/sections/ExperienceModal'
 
-
-
 export const modalsData = [
   {
     modalName: 'experience',
-    component: ExperienceModal
-  }
+    component: ExperienceModal,
+  },
   // profile: AboutModal,
   // colors: ChangeColorsModal,
 ]
-
-
 
 // const modalsData = [
 

@@ -4,15 +4,12 @@ import GlobalStyle from 'theme/GlobalStyle'
 import styled from 'styled-components/macro'
 import { ResumeContextProvider } from 'contexts/ResumeContext'
 
-
 import Sidebar from 'components/builder/left/Sidebar'
 import Preview from 'components/builder/right/Preview'
 import Builder from 'components/builder/center/Builder'
 
-
-
 const Wrapper = styled.div`
-display: flex;
+  display: flex;
 `
 
 const Root = () => (
@@ -29,6 +26,5 @@ const Root = () => (
     </Router>
   </>
 )
-
 
 export default Root

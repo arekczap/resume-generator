@@ -12,16 +12,16 @@ const initialValues = {
   summary: '',
 }
 
-const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
-  const [state, setState] = React.useState(initialValues)
+const ExperienceModal = ({ childrenType, addPositionFn }) => {
+  const [stateValue, setStateValue] = React.useState(initialValues)
 
   const handleChange = (evt) => {
     const value = evt.target.value
-    setState({
-      ...state,
+    setStateValue({
+      ...stateValue,
       [evt.target.name]: value,
     })
-    addPositionFn(state)
+    addPositionFn(stateValue)
   }
 
   return (
@@ -35,7 +35,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={true}
         name={'companyName'}
-        value={state.companyName}
+        value={stateValue.companyName}
         onChange={handleChange}
       />
 
@@ -46,7 +46,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={false}
         name="position"
-        value={state.position}
+        value={stateValue.position}
         onChange={handleChange}
       />
 
@@ -57,7 +57,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={false}
         name="city"
-        value={state.city}
+        value={stateValue.city}
         onChange={handleChange}
       />
 
@@ -68,7 +68,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={false}
         name="startDate"
-        value={state.startDate}
+        value={stateValue.startDate}
         onChange={handleChange}
       />
 
@@ -79,7 +79,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={false}
         name="endDate"
-        value={state.endDate}
+        value={stateValue.endDate}
         onChange={handleChange}
       />
 
@@ -90,7 +90,7 @@ const ExperienceModal = ({ childrenType, addPositionFn, showModalState }) => {
         sectionId={childrenType}
         fullWidth={true}
         name="summary"
-        value={state.summary}
+        value={stateValue.summary}
         onChange={handleChange}
       />
     </>

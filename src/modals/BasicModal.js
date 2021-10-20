@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components/macro'
+import { ResumeContext } from 'contexts/ResumeContext'
+import { modalsData } from 'data/modalsData'
 
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
-import { modalsData } from 'data/modalsData'
 import ModalButton from 'components/shared/AddItemButton'
 
 const style = {
@@ -31,22 +32,28 @@ const ButtonsWrapper = styled.div`
 `
 
 const BasicModal = ({ showModal, childrenType, setShowModal }) => {
-  const handleClose = () => setShowModal(false)
+  const [state, setContextState] = useContext(ResumeContext)
   const [positionItemData, setDataPosition] = useState()
+  const handleClose = () => setShowModal(false)
 
-  const handlePositionItemAdd = () => {
+  const handleAddPositionItem = () => {
     handleClose()
-    console.log('dodaję pozycje do listy')
-    console.log(positionItemData)
-    console.log('czyszcze state')
-    setDataPosition({})
+    setContextState((prevState) => ({
+      ...prevState,
+      [childrenType]: {
+        ...prevState[childrenType],
+        items: [...prevState[childrenType].items, positionItemData],
+      },
+      // state[childrenType].items.push(positionItemData)
+    }))
+    setDataPosition()
   }
 
   return (
     <>
       <Modal
-        // open={showModal}
-        open={true}
+        open={showModal}
+        // open={true}
         onClose={handleClose}
         closeAfterTransition
       >
@@ -58,7 +65,7 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
                   type={childrenType}
                   key={section}
                   addPositionFn={(posItem) => setDataPosition(posItem)}
-                  showModalState={showModal}
+                  toggleModalState={showModal}
                 />
               )
           })}
@@ -66,7 +73,7 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
             <ModalButton style={{ marginRight: ' 2rem' }} onClick={handleClose}>
               {'Anuluj'}
             </ModalButton>
-            <ModalButton onClick={handlePositionItemAdd}>
+            <ModalButton onClick={handleAddPositionItem}>
               {'Dodaj stanowisko'}
             </ModalButton>
           </ButtonsWrapper>

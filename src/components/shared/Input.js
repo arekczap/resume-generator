@@ -105,6 +105,7 @@ const Input = ({
                 placeholder={placeholderName}
                 onChange={id ? handleUpdateValue : onChange}
                 name={name}
+                inputValue
                 // value={state[sectionId][id]}
               />
             )}
