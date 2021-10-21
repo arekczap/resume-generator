@@ -1,11 +1,9 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-
 import HeaderBuilder from 'components/shared/HeaderBuilder'
 import Input from 'components/shared/Input'
 import PhotoInput from 'components/shared/PhotoInput'
-
 
 const Wrapper = styled.div`
   width: 100%;
@@ -13,8 +11,6 @@ const Wrapper = styled.div`
   justify-content: space-between;
   flex-wrap: wrap;
 `
-
-
 
 const About = (props) => {
   const { name, desc } = props.data
@@ -31,7 +27,6 @@ const About = (props) => {
           id={'sectionName'}
           fullWidth={true}
         />
-
 
         <Input
           labelName={'Imię'}
@@ -136,7 +131,6 @@ const About = (props) => {
           id={'githubLink'}
           fullWidth={false}
         />
-
       </Wrapper>
     </>
   )

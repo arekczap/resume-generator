@@ -101,6 +101,7 @@ const Input = ({
 
             {type === 'text' && (
               <InputField
+                autoComplete={'off'}
                 spellCheck={false}
                 placeholder={placeholderName}
                 onChange={id ? handleUpdateValue : onChange}
@@ -114,6 +115,7 @@ const Input = ({
               <TextArea
                 as="textarea"
                 onInput={autoResizeTextArea}
+                autoComplete={'off'}
                 spellCheck={false}
                 wrap="off"
                 placeholder={placeholderName}

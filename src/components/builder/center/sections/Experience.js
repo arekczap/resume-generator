@@ -18,6 +18,7 @@ const WrapperContent = styled.div`
   border: 1px solid var(--color-primary-300);
   margin-top: 4rem;
   cursor: drag;
+  white-space: nowrap;
 `
 
 const EmptyWrapperContent = styled.div`
@@ -40,11 +41,8 @@ const ButtonWrapper = styled.div`
 
 const Experience = (props) => {
   const { name, desc } = props.data
-  const { key, labelText, placeholderText, type } =
-    experienceSectionData.inputData
-  const { items: dataItems, sectionName } = props.stateData
-
-  console.log(sectionName)
+  const { key, labelText, placeholderText, type } = experienceSectionData.inputData
+  const { items: dataItems } = props.stateData
 
   const [showModal, setShowModal] = useState(false)
   return (
@@ -60,18 +58,14 @@ const Experience = (props) => {
       />
       <WrapperContent>
         {dataItems[0] ? (
-          dataItems.map((values, i) => (
-            <ListItem values={values} key={i}></ListItem>
-          ))
+          dataItems.map((values, i) => <ListItem itemData={values} key={i}></ListItem>)
         ) : (
           <EmptyWrapperContent>{'Lista jest pusta'}</EmptyWrapperContent>
         )}
       </WrapperContent>
 
       <ButtonWrapper>
-        <ModalButton onClick={() => setShowModal((prev) => !prev)}>
-          {'Dodaj pozycję'}
-        </ModalButton>
+        <ModalButton onClick={() => setShowModal((prev) => !prev)}>{'Dodaj pozycję'}</ModalButton>
         <BasicModal
           childrenType={props.sectionId}
           setShowModal={setShowModal}

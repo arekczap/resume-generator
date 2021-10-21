@@ -23,7 +23,7 @@ html {
 
 body {
   font-size: 1.6rem;
-  background-color: #5c5c5c;
+  background-color: var(--color-primary-100);
   font-family: 'Montserrat', sans-serif;
 }
 
@@ -53,6 +53,5 @@ body {
     --color-primary-900: #f5f5f5;
 }
 `
-
 
 export default GlobalStyle

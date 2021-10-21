@@ -16,6 +16,15 @@ export const initialState = {
   },
   experience: {
     sectionName: 'Doświadczenie',
-    items: [],
+    items: [
+      {
+        position: 'Front-End Developer',
+        companyName: 'Pyramid Games SA.',
+        city: 'Lublin aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+        startDate: '14-03-2021',
+        endDate: '14-12-1999',
+        summary: 'Robienie gier komputerowych',
+      },
+    ],
   },
 }
