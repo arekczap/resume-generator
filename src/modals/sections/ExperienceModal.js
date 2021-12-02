@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import HeaderBuilder from 'components/shared/HeaderBuilder'
 import Input from 'components/shared/Input'
@@ -13,29 +13,31 @@ const initialValues = {
 }
 
 const ExperienceModal = ({ childrenType, addPositionFn }) => {
-  const [stateValue, setStateValue] = React.useState(initialValues)
+  const [experienceData, setExperienceData] = useState(initialValues)
 
   const handleChange = (evt) => {
-    const value = evt.target.value
-    setStateValue({
-      ...stateValue,
-      [evt.target.name]: value,
-    })
-    addPositionFn(stateValue)
+    const { name, value } = evt.target
+    setExperienceData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }))
   }
+
+  useEffect(() => {
+    addPositionFn(experienceData)
+  }, [addPositionFn, experienceData])
 
   return (
     <>
       <HeaderBuilder name={'Dodaj stanowisko'} />
-      {/* <form onSubmit={addPositionFn}> */}
       <Input
         labelName={'Nazwa firmy'}
         placeholderName={'ABC Corporation Int.'}
         type={'text'}
         sectionId={childrenType}
-        fullWidth={true}
         name={'companyName'}
-        value={stateValue.companyName}
+        fullWidth={true}
+        value={experienceData.companyName}
         onChange={handleChange}
       />
 
@@ -45,8 +47,8 @@ const ExperienceModal = ({ childrenType, addPositionFn }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name="position"
-        value={stateValue.position}
+        name={'position'}
+        value={experienceData.position}
         onChange={handleChange}
       />
 
@@ -56,30 +58,30 @@ const ExperienceModal = ({ childrenType, addPositionFn }) => {
         type={'text'}
         sectionId={childrenType}
         fullWidth={false}
-        name="city"
-        value={stateValue.city}
+        name={'city'}
+        value={experienceData.city}
         onChange={handleChange}
       />
 
       <Input
         labelName={'Data rozpoczęcia'}
-        placeholderName={'DD-MM-YYYY'}
-        type={'text'}
+        placeholderName={'Miesiąc Rok'}
+        type={'date'}
         sectionId={childrenType}
         fullWidth={false}
-        name="startDate"
-        value={stateValue.startDate}
+        name={'startDate'}
+        value={experienceData.startDate}
         onChange={handleChange}
       />
 
       <Input
         labelName={'Data zakończenia'}
-        placeholderName={'DD-MM-YYYY'}
-        type={'text'}
+        placeholderName={'Miesiąc Rok'}
+        type={'date'}
         sectionId={childrenType}
         fullWidth={false}
-        name="endDate"
-        value={stateValue.endDate}
+        name={'endDate'}
+        value={experienceData.endDate}
         onChange={handleChange}
       />
 
@@ -89,8 +91,8 @@ const ExperienceModal = ({ childrenType, addPositionFn }) => {
         type={'textfield'}
         sectionId={childrenType}
         fullWidth={true}
-        name="summary"
-        value={stateValue.summary}
+        name={'summary'}
+        value={experienceData.summary}
         onChange={handleChange}
       />
     </>

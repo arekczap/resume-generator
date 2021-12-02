@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components/macro'
+
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { ResumeContext } from 'contexts/ResumeContext'
 
@@ -65,16 +66,7 @@ const TextArea = styled(InputField)`
   line-height: 1.5rem;
 `
 
-const Input = ({
-  labelName,
-  placeholderName,
-  type,
-  sectionId,
-  id,
-  fullWidth,
-  onChange,
-  name,
-}) => {
+const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onChange, name }) => {
   const [state, setState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
 
@@ -121,6 +113,18 @@ const Input = ({
                 placeholder={placeholderName}
                 onChange={id ? handleUpdateValue : onChange}
                 name={name}
+              />
+            )}
+
+            {type === 'date' && (
+              <InputField
+                name={name}
+                type={'month'}
+                min="1995-01"
+                max="2023-12"
+                placeholder={'miesiąc'}
+                onChange={id ? handleUpdateValue : onChange}
+                inputValue
               />
             )}
 

@@ -90,7 +90,7 @@ const ListItem = (props) => {
   const { position, companyName, city, startDate, endDate } = props.itemData
   const open = Boolean(anchorEl)
 
-  console.log()
+  // console.log(typeof startDate)
 
   const handleClick = (event) => setAnchorEl(event.currentTarget)
   const handleClose = () => setAnchorEl(null)

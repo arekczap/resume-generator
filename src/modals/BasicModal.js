@@ -33,20 +33,20 @@ const ButtonsWrapper = styled.div`
 
 const BasicModal = ({ showModal, childrenType, setShowModal }) => {
   const [state, setContextState] = useContext(ResumeContext)
-  const [positionItemData, setDataPosition] = useState()
+  const [itemData, setItemData] = useState()
   const handleClose = () => setShowModal(false)
 
-  const handleAddPositionItem = () => {
+  const handleAddItem = () => {
+    console.log(itemData)
     handleClose()
     setContextState((prevState) => ({
       ...prevState,
       [childrenType]: {
         ...prevState[childrenType],
-        items: [...prevState[childrenType].items, positionItemData],
+        items: [...prevState[childrenType].items, itemData],
       },
-      // state[childrenType].items.push(positionItemData)
     }))
-    setDataPosition()
+    setItemData()
   }
 
   return (
@@ -64,8 +64,11 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
                 <section.component
                   type={childrenType}
                   key={section}
-                  addPositionFn={(posItem) => setDataPosition(posItem)}
+                  addPositionFn={(posItem) => {
+                    setItemData(posItem)
+                  }}
                   toggleModalState={showModal}
+                  // modalItems={state[childrenType].items}
                 />
               )
           })}
@@ -73,9 +76,7 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
             <ModalButton style={{ marginRight: ' 2rem' }} onClick={handleClose}>
               {'Anuluj'}
             </ModalButton>
-            <ModalButton onClick={handleAddPositionItem}>
-              {'Dodaj stanowisko'}
-            </ModalButton>
+            <ModalButton onClick={handleAddItem}>{'Dodaj pozycję'}</ModalButton>
           </ButtonsWrapper>
         </Box>
       </Modal>

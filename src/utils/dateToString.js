@@ -14,5 +14,5 @@ export const dateToString = (date) => {
     'Grudzień',
   ]
   const dateArray = date.split('-')
-  return months[parseInt(dateArray[1] - 1)] + ' ' + dateArray[2]
+  return months[parseInt(dateArray[1] - 1)] + ' ' + dateArray[0]
 }

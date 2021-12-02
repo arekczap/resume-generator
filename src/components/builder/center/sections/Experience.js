@@ -9,8 +9,6 @@ import Input from 'components/shared/Input'
 
 import BasicModal from 'modals/BasicModal'
 
-import { experienceSectionData } from 'data/experienceSectionData'
-
 const WrapperContent = styled.div`
   width: 95%;
   display: flex;
@@ -41,7 +39,6 @@ const ButtonWrapper = styled.div`
 
 const Experience = (props) => {
   const { name, desc } = props.data
-  const { key, labelText, placeholderText, type } = experienceSectionData.inputData
   const { items: dataItems } = props.stateData
 
   const [showModal, setShowModal] = useState(false)
@@ -49,11 +46,11 @@ const Experience = (props) => {
     <>
       <HeaderBuilder name={name} content={desc} />
       <Input
-        labelName={labelText}
-        placeholderName={placeholderText}
-        type={type}
+        labelName={'Nazwa sekcji'}
+        placeholderName={'Doświadczenie'}
+        type={'text'}
         sectionId={props.sectionId}
-        id={key}
+        id={'sectionName'}
         fullWidth={true}
       />
       <WrapperContent>
@@ -65,7 +62,7 @@ const Experience = (props) => {
       </WrapperContent>
 
       <ButtonWrapper>
-        <ModalButton onClick={() => setShowModal((prev) => !prev)}>{'Dodaj pozycję'}</ModalButton>
+        <ModalButton onClick={() => setShowModal((prev) => !prev)}>{'Dodaj'}</ModalButton>
         <BasicModal
           childrenType={props.sectionId}
           setShowModal={setShowModal}

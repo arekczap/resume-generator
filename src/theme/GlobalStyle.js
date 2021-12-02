@@ -27,6 +27,8 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
+
+
 :root {
   --spacing-small: 1px;
   --spacing-medium: 1.3px;
