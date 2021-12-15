@@ -4,9 +4,9 @@ import GlobalStyle from 'theme/GlobalStyle'
 import styled from 'styled-components/macro'
 import { ResumeContextProvider } from 'contexts/ResumeContext'
 
-import Sidebar from 'components/builder/left/Sidebar'
-import Preview from 'components/builder/right/Preview'
-import Builder from 'components/builder/center/Builder'
+import Sidebar from 'layouts/leftSidebarLayout/left/Sidebar'
+import Preview from 'layouts/rightPreviewLayout/PreviewLayout'
+import BuilderLayout from 'layouts/centerBuilderLayout/BuilderLayout'
 
 const Wrapper = styled.div`
   display: flex;
@@ -35,7 +35,7 @@ const Root = () => {
             <>
               <Sidebar />
               <ResumeContextProvider>
-                <Builder />
+                <BuilderLayout />
                 <Preview />
               </ResumeContextProvider>
             </>

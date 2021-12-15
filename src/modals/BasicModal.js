@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
-import { modalsData } from 'data/modalsData'
+import { modalsData } from 'modals/modalsData'
 
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
-import ModalButton from 'components/shared/AddItemButton'
+import ModalButton from 'components/AddItemButton'
 
 const style = {
   backgroundColor: 'var(--color-primary-100)',
