@@ -5,7 +5,7 @@ import styled from 'styled-components/macro'
 import ModalButton from 'components/AddItemButton'
 import HeaderBuilder from 'components/HeaderBuilder'
 import ListItem from 'components/ListItem'
-import Input from 'components/Input'
+import Input from 'components/Input/Input'
 
 import BasicModal from 'modals/BasicModal'
 

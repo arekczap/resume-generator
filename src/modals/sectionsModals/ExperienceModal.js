@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 
 import HeaderBuilder from 'components/HeaderBuilder'
-import Input from 'components/Input'
+import Input from 'components/Input/Input'
 
 const initialValues = {
   position: '',

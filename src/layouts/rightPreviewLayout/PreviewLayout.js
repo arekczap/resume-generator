@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
-import ToolbarText from 'components/ToolbarText'
+// import ToolbarText from 'components/Input/ToolbarText'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -16,7 +16,7 @@ const Preview = () => {
     <>
       <Wrapper>
         <div>{JSON.stringify(state, null, 4)}</div>
-        <ToolbarText></ToolbarText>
+        {/* <ToolbarText></ToolbarText> */}
       </Wrapper>
     </>
   )

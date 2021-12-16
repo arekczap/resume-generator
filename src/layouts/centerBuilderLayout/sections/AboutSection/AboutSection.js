@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import HeaderBuilder from 'components/HeaderBuilder'
-import Input from 'components/Input'
+import Input from 'components/Input/Input'
 import PhotoInput from 'components/PhotoInput'
 
 const Wrapper = styled.div`

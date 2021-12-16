@@ -3,6 +3,7 @@ import styled from 'styled-components/macro'
 
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { ResumeContext } from 'contexts/ResumeContext'
+import ToolbarText from 'components/Input/ToolbarText'
 
 const Wrapper = styled.div`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : 'calc(50% - 0.5rem)')};
@@ -31,12 +32,8 @@ const LabelName = styled.div`
   padding: 0.8rem 0 0 2rem;
   font-size: 1.3rem;
   color: var(--color-primary-600);
-  z-index: 1;
+  z-index: ${({ depth }) => depth};
   cursor: text;
-
-  ::placeholder {
-    color: var(--color-primary-800);
-  }
 `
 
 const InputField = styled.input`
@@ -62,15 +59,15 @@ const InputField = styled.input`
   }
 `
 
-const TextArea = styled(InputField)`
-  resize: none;
-  height: 6rem;
-  margin-top: 3.5rem;
-  padding: 0.2rem 5rem 1rem 2.2rem;
-  background-color: var(--color-primary-200);
-  color: var(--color-primary-900);
-  line-height: 1.5rem;
-`
+// const TextArea = styled(InputField)`
+//   resize: none;
+//   height: 6rem;
+//   margin-top: 3.5rem;
+//   padding: 0.2rem 5rem 1rem 2.2rem;
+//   background-color: var(--color-primary-200);
+//   color: var(--color-primary-900);
+//   line-height: 1.5rem;
+// `
 
 const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onChange, name }) => {
   const [state, setState] = useContext(ResumeContext)
@@ -86,18 +83,17 @@ const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onC
     }))
   }
 
-  console.log(id)
-  const autoResizeTextArea = (e) => {
-    e.target.style.height = 'auto'
-    e.target.style.height = e.target.scrollHeight + 'px'
-  }
+  // const autoResizeTextArea = (e) => {
+  //   e.target.style.height = 'auto'
+  //   e.target.style.height = e.target.scrollHeight + 'px'
+  // }
+
   return (
     <>
       {
         <Wrapper type={type} id={id} fullWidth={fullWidth}>
           <label>
-            <LabelName>{labelName}</LabelName>
-
+            <LabelName depth={type === 'textfield' ? -1 : 1}>{labelName}</LabelName>
             {type === 'text' && (
               <InputField
                 autoComplete={'off'}
@@ -108,19 +104,6 @@ const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onC
                 inputValue
                 //section name default value eg. "Doświadczenie"
                 value={id && state[sectionId][id]}
-              />
-            )}
-
-            {type === 'textfield' && (
-              <TextArea
-                as="textarea"
-                onInput={autoResizeTextArea}
-                autoComplete={'off'}
-                spellCheck={false}
-                wrap="off"
-                placeholder={placeholderName}
-                onChange={id ? handleUpdateValue : onChange}
-                name={name}
               />
             )}
 
@@ -135,20 +118,30 @@ const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onC
                 inputValue
               />
             )}
-
-            <AiFillCheckCircle
-              style={{
-                position: 'absolute',
-                fill: 'var(--color-primary-900)',
-                width: '2rem',
-                height: '5.8rem',
-                right: '1.5rem',
-                opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
-                transition: 'opacity .4s',
-                pointerEvents: 'none',
-              }}
-            />
           </label>
+
+          {type === 'textfield' && (
+            <ToolbarText
+              // onInput={autoResizeTextArea}
+              autoComplete={'off'}
+              spellCheck={false}
+              wrap="off"
+              placeholder={placeholderName}
+              onChange={id ? handleUpdateValue : onChange}
+            />
+          )}
+          <AiFillCheckCircle
+            style={{
+              position: 'absolute',
+              fill: 'var(--color-primary-900)',
+              width: '2rem',
+              height: '5.8rem',
+              right: '1.5rem',
+              opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
+              transition: 'opacity .4s',
+              pointerEvents: 'none',
+            }}
+          />
         </Wrapper>
       }
     </>
