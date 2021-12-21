@@ -4,7 +4,7 @@ import siteLogo from 'assets/logo.png'
 
 // import DownloadResume from 'components/builder/left/DownloadResume'
 import { sidebarData } from 'data/SidebarData'
-import SubMenu from 'layouts/leftSidebarLayout/left/SubMenu'
+import SubMenu from 'layouts/leftSidebarLayout/SubMenu'
 
 const Wrapper = styled.div`
   width: 22rem;
@@ -15,6 +15,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   position: relative;
 `
+
 const LogoImage = styled.img`
   margin: 3rem 4rem;
   cursor: pointer;
@@ -28,17 +29,17 @@ const NavWrap = styled.div`
   align-items: left;
   overflow: auto;
 
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     display: none;
   }
 `
 
 const LeftSideBar = () => (
   <Wrapper>
-    <LogoImage src={siteLogo}></LogoImage>
+    <LogoImage src={siteLogo} />
     <NavWrap>
-      {sidebarData.map((item, index) => {
-        return <SubMenu item={item} key={index} />
+      {sidebarData.map((item) => {
+        return <SubMenu item={item} key={item.title} />
       })}
     </NavWrap>
     {/* <DownloadResume></DownloadResume> */}

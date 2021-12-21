@@ -8,7 +8,9 @@ import routesData from './RoutesData'
 
 const Routes = () => {
   const location = useLocation()
-  const [elementData, setData] = useState({})
+  
+  const [elementData, setElementData] = useState({})
+
   const [state] = useContext(ResumeContext)
 
   //set data header name, desc to builder component
@@ -16,9 +18,9 @@ const Routes = () => {
     sidebarData.forEach((item) => {
       item.subNav.forEach((item) => {
         if (item.path === location.pathname) {
-          setData({
+          setElementData({
             name: item.title,
-            desc: item.headingContent,
+            description: item.headingContent,
           })
         }
       })
@@ -28,7 +30,7 @@ const Routes = () => {
   return (
     <>
       <Switch>
-        {routesData.map((item, index) => {
+        {routesData.map((item) => {
           return (
             <Route
               path={item.path}
@@ -41,7 +43,7 @@ const Routes = () => {
                   />
                 )
               }}
-              key={index}
+              key={item.key}
             />
           )
         })}

@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components/macro'
-
 
 const GroupName = styled.div`
   display: flex;
@@ -18,12 +17,12 @@ const GroupName = styled.div`
   user-select: none;
   transition: background-color 0.2s;
 
-    
   & > svg {
     font-size: 2.2rem;
   }
 
-  & > svg > path, polyline {
+  & > svg > path,
+  polyline {
     stroke: white;
   }
 
@@ -53,33 +52,26 @@ const DropDownLink = styled(Link)`
 `
 
 const SubMenu = ({ item }) => {
-  const [subnav, sideBar] = useState(true)
-  const toogleSidebar = () => sideBar(prev => !prev)
-
+  const [subNav, setSubNav] = useState(true)
+  const toogleSidebar = useCallback(() => {
+    setSubNav((prev) => !prev)
+  }, [])
 
   return (
     <>
-      <GroupName onClick={toogleSidebar} >
+      <GroupName onClick={toogleSidebar}>
         {item.icon}
         <LinkLabel>{item.title}</LinkLabel>
-        {
-          subnav
-            ? item.iconOpen
-            : item.subNav
-              ? item.iconClosed
-              : null
-        }
+        {subNav ? item.iconOpen : item.subNav ? item.iconClosed : null}
       </GroupName>
-      {
-        subnav && item.subNav.map((item, index) => {
+      {subNav &&
+        item.subNav.map((item, index) => {
           return (
             <DropDownLink to={item.path} key={index}>
               <LinkLabel>{item.title}</LinkLabel>
             </DropDownLink>
           )
-        })
-      }
-
+        })}
     </>
   )
 }

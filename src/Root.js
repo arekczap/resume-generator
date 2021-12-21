@@ -4,7 +4,7 @@ import GlobalStyle from 'theme/GlobalStyle'
 import styled from 'styled-components/macro'
 import { ResumeContextProvider } from 'contexts/ResumeContext'
 
-import Sidebar from 'layouts/leftSidebarLayout/left/Sidebar'
+import Sidebar from 'layouts/leftSidebarLayout/Sidebar'
 import Preview from 'layouts/rightPreviewLayout/PreviewLayout'
 import BuilderLayout from 'layouts/centerBuilderLayout/BuilderLayout'
 
@@ -14,7 +14,6 @@ const Wrapper = styled.div`
   max-width: 192rem;
   height: 100vh;
   margin: 0 auto;
-  /* display: flex; */
 `
 
 const Root = () => {

@@ -38,13 +38,13 @@ const ButtonWrapper = styled.div`
 `
 
 const Experience = (props) => {
-  const { name, desc } = props.data
+  const { name, description } = props.data
   const { items: dataItems } = props.stateData
 
   const [showModal, setShowModal] = useState(false)
   return (
     <>
-      <HeaderBuilder name={name} content={desc} />
+      <HeaderBuilder name={name} content={description} />
       <Input
         labelName={'Nazwa sekcji'}
         placeholderName={'Doświadczenie'}

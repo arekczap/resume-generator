@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Routes from 'layouts/centerBuilderLayout/routes/Routes'
+import Routes from 'routes/Routes'
 
 const Wrapper = styled.div`
   height: 100vh;
@@ -23,12 +23,12 @@ const BuilderWrapper = styled.div`
   align-items: center;
   overflow-y: overlay;
 
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     width: 10px;
     position: absolute;
   }
 
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: var(--color-primary-400);
     border-radius: 5px;
   }

@@ -13,11 +13,11 @@ const Wrapper = styled.div`
 `
 
 const About = (props) => {
-  const { name, desc } = props.data
+  const { name, description } = props.data
 
   return (
     <>
-      <HeaderBuilder name={name} content={desc} />
+      <HeaderBuilder name={name} content={description} />
       <Wrapper>
         <Input
           labelName={'Nazwa sekcji'}
