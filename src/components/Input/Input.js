@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useCallback } from 'react'
 import styled from 'styled-components/macro'
 
 import { AiFillCheckCircle } from 'react-icons/ai'
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   transition: box-shadow 0.1s;
   border: 1px solid transparent;
 
-  :hover {
+  &:hover {
     border: 1px solid var(--color-primary-700);
   }
 `
@@ -50,12 +50,22 @@ const InputField = styled.input`
   letter-spacing: var(--spacing-small);
   border: 1px solid transparent;
 
-  ::placeholder {
+  &::placeholder {
     opacity: 0.8;
   }
 
-  :focus {
+  &:focus {
     border: 1px solid var(--color-primary-700);
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    bottom: 0;
+    right: 1rem;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
   }
 `
 
@@ -73,20 +83,17 @@ const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onC
   const [state, setState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
 
-  const handleUpdateValue = (e) => {
-    console.log(e.target.value)
-    e.preventDefault()
-    setInputValue(e.target.value)
-    setState((prevState) => ({
-      ...prevState,
-      [sectionId]: { ...prevState[sectionId], [id]: e.target.value },
-    }))
-  }
-
-  // const autoResizeTextArea = (e) => {
-  //   e.target.style.height = 'auto'
-  //   e.target.style.height = e.target.scrollHeight + 'px'
-  // }
+  const handleUpdateValue = useCallback(
+    (evt) => {
+      evt.preventDefault()
+      setInputValue(evt.target.value)
+      setState((prevState) => ({
+        ...prevState,
+        [sectionId]: { ...prevState[sectionId], [id]: evt.target.value },
+      }))
+    },
+    [id, sectionId, setState]
+  )
 
   return (
     <>

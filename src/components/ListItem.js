@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components/macro'
 
 import Switch from '@mui/material/Switch'
@@ -88,30 +88,27 @@ const MoveIconsWrapper = styled.div`
 const ListItem = (props) => {
   const [anchorEl, setAnchorEl] = useState(null)
   const { position, companyName, city, startDate, endDate } = props.itemData
-  const open = Boolean(anchorEl)
 
-  // console.log(typeof startDate)
-
-  const handleClick = (event) => setAnchorEl(event.currentTarget)
-  const handleClose = () => setAnchorEl(null)
-  const handleEdit = () => {
+  const handleClick = useCallback((event) => setAnchorEl(event.currentTarget), [])
+  const handleClose = useCallback(() => setAnchorEl(null), [])
+  const handleEdit = useCallback(() => {
     console.log('edytuj')
-  }
-  const handleRemove = () => {
+  }, [])
+  const handleRemove = useCallback(() => {
     console.log('usuń')
-  }
+  }, [])
 
   return (
     <Wrapper>
       <ItemWrapper>
         <ItemText>{`${companyName}, ${city}`}</ItemText>
         <ItemText>{`${position}`}</ItemText>
-        <ItemText>{`${dateToString(startDate)} - ${dateToString(endDate)}`}</ItemText>
+        <ItemText>{`${dateToString({ startDate })} - ${dateToString({ endDate })}`}</ItemText>
       </ItemWrapper>
       <ButtonsWrapper>
         <Switch style={{ fontSize: '35px' }} size="50px" color="primary" name="toggleSwitch" />
         <ReactIconsDotsVertical size="2.5rem" onClick={handleClick} />
-        <Menu id="long-menu" anchorEl={anchorEl} open={open} onClose={handleClose}>
+        <Menu id="long-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
           <MoveIconsWrapper>
             <MaterialMenuItem onClick={handleClose}>
               <BsChevronUp disabled size="2.5rem" />
@@ -120,9 +117,9 @@ const ListItem = (props) => {
               <BsChevronDown size="2.5rem" />
             </MaterialMenuItem>
           </MoveIconsWrapper>
-          <MaterialMenuItem onClick={handleEdit}>{'Edytuj'}</MaterialMenuItem>
+          <MaterialMenuItem onClick={handleEdit}>Edytuj</MaterialMenuItem>
           <MaterialMenuItem color={'red'} onClick={handleRemove}>
-            {'Usuń'}
+            Usuń
           </MaterialMenuItem>
         </Menu>
       </ButtonsWrapper>

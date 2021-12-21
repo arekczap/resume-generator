@@ -1,5 +1,5 @@
 export const dateToString = (date) => {
-  var months = [
+  let months = [
     'Styczeń',
     'Luty',
     'Marzec',
@@ -13,6 +13,8 @@ export const dateToString = (date) => {
     'Listopad',
     'Grudzień',
   ]
+
+  if (date !== '') return ''
   const dateArray = date.split('-')
   return months[parseInt(dateArray[1] - 1)] + ' ' + dateArray[0]
 }

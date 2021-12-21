@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { BsPersonPlusFill } from "react-icons/bs"
-
+import { BsPersonPlusFill } from 'react-icons/bs'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,8 +31,8 @@ const UpdateFieldWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
- 
-  :hover {
+
+  &:hover {
     background-color: var(--color-primary-300);
   }
 `
@@ -47,17 +46,15 @@ const Label = styled.label`
   cursor: pointer;
 `
 
-const UploadInput = styled.input.attrs(
-  {
-    type: 'file',
-    autocomplete: 'off',
-    accept: 'image/gif,image/jpg,image/jpeg,image/png'
-  })
-  `
+const UploadInput = styled.input.attrs({
+  type: 'file',
+  autocomplete: 'off',
+  accept: 'image/gif,image/jpg,image/jpeg,image/png',
+})`
   width: 100%;
   height: 100%;
-  visibility:hidden;
-  display:none; 
+  visibility: hidden;
+  display: none;
 `
 
 const TextContentWrapper = styled.div`
@@ -70,41 +67,36 @@ const HeaderText = styled.h2`
 `
 
 const HintText = styled.li`
- font-size: 1.2rem;
- margin: 0.5rem 0 0 2rem;
+  font-size: 1.2rem;
+  margin: 0.5rem 0 0 2rem;
 
- ::marker {
-  font-size: 1.5rem;
- }
+  &::marker {
+    font-size: 1.5rem;
+  }
+`
+const StyledBsPersonPlusFill = styled(BsPersonPlusFill)`
+  width: 70%;
+  height: 70%;
+  opacity: 0.7;
+  fill: var(--color-primary-900);
 `
 
-
 const PhotoInput = ({ headerText, hints }) => {
-
   return (
     <>
       <Wrapper>
         <UpdateFieldWrapper>
           <Label htmlFor={'imgFile'}>
-            <BsPersonPlusFill style={
-              {
-                width: '70%',
-                height: '70%',
-                opacity: '0.7',
-                fill: 'var(--color-primary-900)',
-              }
-            } />
+            <StyledBsPersonPlusFill />
           </Label>
           <UploadInput id={'imgFile'} />
         </UpdateFieldWrapper>
         <TextContentWrapper>
           <HeaderText>{headerText}</HeaderText>
           <ul>
-            {
-              hints.map((item, index) => {
-                return <HintText key={index}>{item}</HintText>
-              })
-            }
+            {hints.map((item) => {
+              return <HintText key={item}>{item}</HintText>
+            })}
           </ul>
         </TextContentWrapper>
       </Wrapper>

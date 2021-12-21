@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 
 import HeaderBuilder from 'components/HeaderBuilder'
 import Input from 'components/Input/Input'
@@ -15,13 +15,13 @@ const initialValues = {
 const ExperienceModal = ({ childrenType, addPositionFn }) => {
   const [experienceData, setExperienceData] = useState(initialValues)
 
-  const handleChange = (evt) => {
+  const handleChange = useCallback((evt) => {
     const { name, value } = evt.target
     setExperienceData((prevState) => ({
       ...prevState,
       [name]: value,
     }))
-  }
+  }, [])
 
   useEffect(() => {
     addPositionFn(experienceData)

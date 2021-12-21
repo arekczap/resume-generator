@@ -23,7 +23,6 @@ const StReactQuill = styled(ReactQuill)`
 
   .ql-active {
     background: var(--color-primary-50) !important;
-    border-radius: 3px;
   }
 
   .ql-toolbar.ql-snow {

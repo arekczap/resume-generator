@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useCallback } from 'react'
 import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
 import { modalsData } from 'modals/modalsData'
@@ -7,22 +7,22 @@ import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
 import ModalButton from 'components/AddItemButton'
 
-const style = {
-  backgroundColor: 'var(--color-primary-100)',
-  minWidth: '50rem',
-  maxWidth: '80rem',
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  borderRadius: '5px',
-  outline: 'none',
-  padding: '2rem',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  justifyContent: 'space-between',
-}
+const StyledBox = styled(Box)`
+  background-color: var(--color-primary-100);
+  min-width: 50rem;
+  max-width: 80rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  outline: none;
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`
 
 const ButtonsWrapper = styled.div`
   width: 100%;
@@ -32,12 +32,11 @@ const ButtonsWrapper = styled.div`
 `
 
 const BasicModal = ({ showModal, childrenType, setShowModal }) => {
-  const [state, setContextState] = useContext(ResumeContext)
+  const [contextState, setContextState] = useContext(ResumeContext)
   const [itemData, setItemData] = useState()
-  const handleClose = () => setShowModal(false)
+  const handleClose = useCallback(() => setShowModal(false), [setShowModal])
 
-  const handleAddItem = () => {
-    console.log(itemData)
+  const handleAddItem = useCallback(() => {
     handleClose()
     setContextState((prevState) => ({
       ...prevState,
@@ -46,20 +45,17 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
         items: [...prevState[childrenType].items, itemData],
       },
     }))
+    console.log(itemData)
     setItemData()
-  }
+  }, [childrenType, handleClose, itemData, setContextState])
 
   return (
     <>
-      <Modal
-        open={showModal}
-        // open={true}
-        onClose={handleClose}
-        closeAfterTransition
-      >
-        <Box sx={style}>
-          {modalsData.map((section) => {
-            if (section.modalName === childrenType)
+      <Modal open={showModal} onClose={handleClose} closeAfterTransition>
+        <StyledBox>
+          {modalsData
+            .filter((section) => section.modalName === childrenType)
+            .map((section) => {
               return (
                 <section.component
                   type={childrenType}
@@ -68,17 +64,16 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
                     setItemData(posItem)
                   }}
                   toggleModalState={showModal}
-                  // modalItems={state[childrenType].items}
                 />
               )
-          })}
+            })}
           <ButtonsWrapper>
             <ModalButton style={{ marginRight: ' 2rem' }} onClick={handleClose}>
-              {'Anuluj'}
+              Anuluj
             </ModalButton>
-            <ModalButton onClick={handleAddItem}>{'Dodaj pozycję'}</ModalButton>
+            <ModalButton onClick={handleAddItem}>Dodaj pozycję</ModalButton>
           </ButtonsWrapper>
-        </Box>
+        </StyledBox>
       </Modal>
     </>
   )

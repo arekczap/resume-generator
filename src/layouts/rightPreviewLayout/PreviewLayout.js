@@ -15,7 +15,7 @@ const Preview = () => {
   return (
     <>
       <Wrapper>
-        <div>{JSON.stringify(state, null, 4)}</div>
+        <pre>{JSON.stringify(state, null, 4)}</pre>
         {/* <ToolbarText></ToolbarText> */}
       </Wrapper>
     </>
