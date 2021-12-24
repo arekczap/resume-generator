@@ -69,17 +69,17 @@ const InputField = styled.input`
   }
 `
 
-// const TextArea = styled(InputField)`
-//   resize: none;
-//   height: 6rem;
-//   margin-top: 3.5rem;
-//   padding: 0.2rem 5rem 1rem 2.2rem;
-//   background-color: var(--color-primary-200);
-//   color: var(--color-primary-900);
-//   line-height: 1.5rem;
-// `
-
-const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onChange, name }) => {
+const Input = ({
+  labelName,
+  placeholderName,
+  type,
+  sectionId,
+  id,
+  fullWidth,
+  onChange,
+  name,
+  required,
+}) => {
   const [state, setState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
 
@@ -108,8 +108,7 @@ const Input = ({ labelName, placeholderName, type, sectionId, id, fullWidth, onC
                 placeholder={placeholderName}
                 onChange={id ? handleUpdateValue : onChange}
                 name={name}
-                inputValue
-                //section name default value eg. "Doświadczenie"
+                // set section name to default value eg. "Doświadczenie"
                 value={id && state[sectionId][id]}
               />
             )}

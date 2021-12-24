@@ -1,7 +1,7 @@
 import React, { useState, useContext, useCallback } from 'react'
 import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
-import { modalsData } from 'modals/modalsData'
+import { modalsData } from 'data/modals/modalsData'
 
 import Box from '@mui/material/Box'
 import Modal from '@mui/material/Modal'
@@ -34,9 +34,11 @@ const ButtonsWrapper = styled.div`
 const BasicModal = ({ showModal, childrenType, setShowModal }) => {
   const [contextState, setContextState] = useContext(ResumeContext)
   const [itemData, setItemData] = useState()
+  const [elementsToValidate, setElementsToValidate] = useState()
   const handleClose = useCallback(() => setShowModal(false), [setShowModal])
 
   const handleAddItem = useCallback(() => {
+    console.log(elementsToValidate)
     handleClose()
     setContextState((prevState) => ({
       ...prevState,
@@ -45,23 +47,23 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
         items: [...prevState[childrenType].items, itemData],
       },
     }))
-    console.log(itemData)
     setItemData()
-  }, [childrenType, handleClose, itemData, setContextState])
+  }, [childrenType, handleClose, itemData, setContextState, elementsToValidate])
 
   return (
     <>
       <Modal open={showModal} onClose={handleClose} closeAfterTransition>
         <StyledBox>
           {modalsData
-            .filter((section) => section.modalName === childrenType)
-            .map((section) => {
+            .filter((item) => item.modalName === childrenType)
+            .map((item) => {
               return (
-                <section.component
-                  type={childrenType}
-                  key={section}
-                  addPositionFn={(posItem) => {
-                    setItemData(posItem)
+                <item.component
+                  childrenType={childrenType}
+                  key={item}
+                  addPositionFn={(posItem, validateElements) => {
+                    setItemData(posItem, validateElements)
+                    setElementsToValidate(validateElements)
                   }}
                   toggleModalState={showModal}
                 />
