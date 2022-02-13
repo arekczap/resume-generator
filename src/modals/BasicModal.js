@@ -1,4 +1,4 @@
-import React, { useState, useContext, useCallback } from 'react'
+import React, { useState, useContext, useCallback, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { ResumeContext } from 'contexts/ResumeContext'
 import { modalsData } from 'data/modals/modalsData'
@@ -31,28 +31,50 @@ const ButtonsWrapper = styled.div`
   justify-content: flex-end;
 `
 
-const BasicModal = ({ showModal, childrenType, setShowModal }) => {
+const BasicModal = ({ toggleModalState, childrenType, setCloseModal }) => {
   const [contextState, setContextState] = useContext(ResumeContext)
-  const [itemData, setItemData] = useState()
-  const [elementsToValidate, setElementsToValidate] = useState()
-  const handleClose = useCallback(() => setShowModal(false), [setShowModal])
+  const [modalData, setModalData] = useState()
+  const [validateElements, setValidateElements] = useState()
+  const [tryCloseModalState, setTryCloseModal] = useState()
+
+  const handleClose = useCallback(() => {
+    setTryCloseModal()
+    setCloseModal(false)
+  }, [setCloseModal])
 
   const handleAddItem = useCallback(() => {
-    console.log(elementsToValidate)
+    const restValidatedKeys = validateElements.filter((key) => modalData[key] === '')
+    setTryCloseModal(true)
+    if (restValidatedKeys.length !== 0) return
+
     handleClose()
     setContextState((prevState) => ({
       ...prevState,
       [childrenType]: {
         ...prevState[childrenType],
-        items: [...prevState[childrenType].items, itemData],
+        items: [...prevState[childrenType].items, modalData],
       },
     }))
-    setItemData()
-  }, [childrenType, handleClose, itemData, setContextState, elementsToValidate])
+
+    setModalData()
+  }, [childrenType, handleClose, modalData, setContextState, validateElements])
+
+  useEffect(() => {
+    const requiredArray = []
+    modalsData
+      .filter((modal) => modal.modalName === childrenType)
+      .forEach((currentModal) => {
+        currentModal.modalData.forEach((item) => {
+          if (item.required) requiredArray.push(item.name)
+        })
+      })
+
+    setValidateElements(requiredArray)
+  }, [childrenType, tryCloseModalState])
 
   return (
     <>
-      <Modal open={showModal} onClose={handleClose} closeAfterTransition>
+      <Modal open={toggleModalState} onClose={handleClose} closeAfterTransition>
         <StyledBox>
           {modalsData
             .filter((item) => item.modalName === childrenType)
@@ -61,11 +83,12 @@ const BasicModal = ({ showModal, childrenType, setShowModal }) => {
                 <item.component
                   childrenType={childrenType}
                   key={item}
-                  addPositionFn={(posItem, validateElements) => {
-                    setItemData(posItem, validateElements)
-                    setElementsToValidate(validateElements)
+                  modalInputsData={(posItem) => {
+                    setModalData(posItem)
                   }}
-                  toggleModalState={showModal}
+                  validateElements={validateElements}
+                  modalData={item.modalData}
+                  tryCloseModalState={tryCloseModalState}
                 />
               )
             })}

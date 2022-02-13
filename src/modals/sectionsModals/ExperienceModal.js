@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 
 import HeaderBuilder from 'components/HeaderBuilder'
 import Input from 'components/Input/Input'
-import { experienceModalData } from 'data/modals/experienceModalData'
 
 const initialValues = {
   position: '',
@@ -13,9 +12,14 @@ const initialValues = {
   summary: '',
 }
 
-const ExperienceModal = ({ childrenType, addPositionFn }) => {
+const ExperienceModal = ({
+  childrenType,
+  modalInputsData,
+  modalData,
+  validateElements,
+  tryCloseModalState,
+}) => {
   const [experienceData, setExperienceData] = useState(initialValues)
-  const [validateElements, setValidateElements] = useState()
 
   const handleChange = useCallback((evt) => {
     const { name, value } = evt.target
@@ -26,21 +30,13 @@ const ExperienceModal = ({ childrenType, addPositionFn }) => {
   }, [])
 
   useEffect(() => {
-    const requiredArray = []
-    experienceModalData.forEach(({ name, required }) => {
-      if (required) requiredArray.push(name)
-    })
-    setValidateElements(requiredArray)
-  }, [])
-
-  useEffect(() => {
-    addPositionFn(experienceData, validateElements)
-  }, [addPositionFn, experienceData, validateElements])
+    modalInputsData(experienceData)
+  }, [modalInputsData, experienceData])
 
   return (
     <>
       <HeaderBuilder name={'Dodaj stanowisko'} />
-      {experienceModalData.map(({ labelName, placeholderName, type, name, fullWidth }) => (
+      {modalData.map(({ labelName, placeholderName, type, name, fullWidth }) => (
         <Input
           key={name}
           labelName={labelName}
@@ -49,9 +45,9 @@ const ExperienceModal = ({ childrenType, addPositionFn }) => {
           sectionId={childrenType}
           name={name}
           fullWidth={fullWidth}
-          // temp
-          // value={experienceData[name]}
+          validateElements={validateElements}
           onChange={handleChange}
+          tryCloseModalState={tryCloseModalState}
         />
       ))}
     </>

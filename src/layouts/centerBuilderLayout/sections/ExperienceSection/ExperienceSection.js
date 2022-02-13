@@ -41,7 +41,8 @@ const Experience = (props) => {
   const { name, description } = props.data
   const { items: dataItems } = props.stateData
 
-  const [showModal, setShowModal] = useState(false)
+  const [toggleModal, setToggleModal] = useState(false)
+
   return (
     <>
       <HeaderBuilder name={name} content={description} />
@@ -62,11 +63,11 @@ const Experience = (props) => {
       </WrapperContent>
 
       <ButtonWrapper>
-        <ModalButton onClick={() => setShowModal((prev) => !prev)}>{'Dodaj'}</ModalButton>
+        <ModalButton onClick={() => setToggleModal((prev) => !prev)}>{'Dodaj'}</ModalButton>
         <BasicModal
           childrenType={props.sectionId}
-          setShowModal={setShowModal}
-          showModal={showModal}
+          setCloseModal={() => setToggleModal((prev) => !prev)}
+          toggleModalState={toggleModal}
         />
       </ButtonWrapper>
 

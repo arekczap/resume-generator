@@ -7,6 +7,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100vh;
   background-color: white;
+  overflow: auto;
 `
 
 const Preview = () => {
@@ -16,7 +17,6 @@ const Preview = () => {
     <>
       <Wrapper>
         <pre>{JSON.stringify(state, null, 4)}</pre>
-        {/* <ToolbarText></ToolbarText> */}
       </Wrapper>
     </>
   )

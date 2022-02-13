@@ -1,4 +1,4 @@
-import React, { useContext, useState, useCallback } from 'react'
+import React, { useContext, useState, useCallback, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import { AiFillCheckCircle } from 'react-icons/ai'
@@ -18,10 +18,13 @@ const Wrapper = styled.div`
   text-overflow: ellipsis;
   z-index: 2;
   transition: box-shadow 0.1s;
-  border: 1px solid transparent;
+  border: ${({ isValidated }) => (isValidated ? '1px solid transparent' : '1px solid red')};
+  /* border: 1px solid transparent;
+  border: 1px solid red; */
 
   &:hover {
-    border: 1px solid var(--color-primary-700);
+    border: ${({ isValidated }) =>
+      isValidated ? '1px solid var(--color-primary-700)' : '1px solid red'};
   }
 `
 
@@ -55,7 +58,8 @@ const InputField = styled.input`
   }
 
   &:focus {
-    border: 1px solid var(--color-primary-700);
+    border: ${({ isValidated }) =>
+      isValidated ? '1px solid var(--color-primary-700)' : '1px solid red'};
   }
 
   &::-webkit-calendar-picker-indicator {
@@ -63,42 +67,62 @@ const InputField = styled.input`
     width: 2rem;
     height: 2rem;
     bottom: 0;
-    right: 1rem;
+    right: 5rem;
     padding: 0.5rem 0.5rem;
     cursor: pointer;
   }
 `
 
-const Input = ({
-  labelName,
-  placeholderName,
-  type,
-  sectionId,
-  id,
-  fullWidth,
-  onChange,
-  name,
-  required,
-}) => {
-  const [state, setState] = useContext(ResumeContext)
+const Input = (props) => {
+  const {
+    labelName,
+    placeholderName,
+    type,
+    sectionId,
+    id,
+    onChange,
+    name,
+    validateElements,
+    tryCloseModalState,
+  } = props
+
+  const [globalState, setGlobalState] = useContext(ResumeContext)
   const [inputValue, setInputValue] = useState('')
+  const [isRequired, setIsRequired] = useState(false)
+  const [isValidated, setIsValidated] = useState(true)
 
   const handleUpdateValue = useCallback(
     (evt) => {
-      evt.preventDefault()
       setInputValue(evt.target.value)
-      setState((prevState) => ({
-        ...prevState,
-        [sectionId]: { ...prevState[sectionId], [id]: evt.target.value },
-      }))
+
+      if (id) {
+        evt.preventDefault()
+        setGlobalState((prevState) => ({
+          ...prevState,
+          [sectionId]: { ...prevState[sectionId], [id]: evt.target.value },
+        }))
+      } else {
+        onChange(evt)
+      }
     },
-    [id, sectionId, setState]
+    [id, sectionId, setGlobalState, onChange]
   )
+
+  useEffect(() => {
+    if (validateElements)
+      validateElements.forEach((element) => {
+        if (element === name) setIsRequired(true)
+      })
+
+    if (isRequired && tryCloseModalState) {
+      inputValue ? setIsValidated(true) : setIsValidated(false)
+    }
+  }, [name, validateElements, inputValue, isRequired, tryCloseModalState])
 
   return (
     <>
       {
-        <Wrapper type={type} id={id} fullWidth={fullWidth}>
+        <Wrapper {...props} isValidated={isValidated}>
           <label>
             <LabelName depth={type === 'textfield' ? -1 : 1}>{labelName}</LabelName>
             {type === 'text' && (
@@ -106,34 +130,33 @@ const Input = ({
                 autoComplete={'off'}
                 spellCheck={false}
                 placeholder={placeholderName}
-                onChange={id ? handleUpdateValue : onChange}
+                onChange={handleUpdateValue}
                 name={name}
                 // set section name to default value eg. "Doświadczenie"
-                value={id && state[sectionId][id]}
+                value={id && globalState[sectionId][id]}
+                isValidated={isValidated}
               />
             )}
 
             {type === 'date' && (
               <InputField
                 name={name}
-                type={'month'}
+                type={'date'}
                 min="1995-01"
                 max="2023-12"
-                placeholder={'miesiąc'}
-                onChange={id ? handleUpdateValue : onChange}
-                inputValue
+                onChange={handleUpdateValue}
+                isValidated={isValidated}
               />
             )}
           </label>
 
           {type === 'textfield' && (
             <ToolbarText
-              // onInput={autoResizeTextArea}
               autoComplete={'off'}
               spellCheck={false}
               wrap="off"
               placeholder={placeholderName}
-              onChange={id ? handleUpdateValue : onChange}
+              onChange={handleUpdateValue}
             />
           )}
           <AiFillCheckCircle
