@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import ReactQuill from 'react-quill'
 import styled from 'styled-components/macro'
 
@@ -57,10 +57,13 @@ const StReactQuill = styled(ReactQuill)`
 const ToolbarText = (props) => {
   const [body, setBody] = React.useState('')
 
-  const handleBody = (e) => {
-    console.log(e)
-    setBody(e)
-  }
+  const handleBody = useCallback(
+    (evt) => {
+      setBody(evt)
+      props.setValue(evt)
+    },
+    [props]
+  )
 
   return (
     <>

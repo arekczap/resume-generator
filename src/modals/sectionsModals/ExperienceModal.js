@@ -1,15 +1,18 @@
 import React, { useState, useEffect, useCallback } from 'react'
+import { useLocation } from 'react-router-dom'
 
 import HeaderBuilder from 'components/HeaderBuilder'
 import Input from 'components/Input/Input'
 
 const initialValues = {
+  id: '',
   position: '',
   companyName: '',
   city: '',
   startDate: '',
   endDate: '',
   summary: '',
+  visible: true,
 }
 
 const ExperienceModal = ({
@@ -18,20 +21,25 @@ const ExperienceModal = ({
   modalData,
   validateElements,
   tryCloseModalState,
+  globalContext,
 }) => {
   const [experienceData, setExperienceData] = useState(initialValues)
+  const location = useLocation()
 
-  const handleChange = useCallback((evt) => {
-    const { name, value } = evt.target
-    setExperienceData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
-  }, [])
+  const handleChange = useCallback(
+    (name, value) => {
+      setExperienceData((prevState) => ({
+        ...prevState,
+        id: globalContext[location.pathname.split('/').slice(-1)].items.length + 1,
+        [name]: value,
+      }))
+    },
+    [globalContext, location.pathname]
+  )
 
   useEffect(() => {
     modalInputsData(experienceData)
-  }, [modalInputsData, experienceData])
+  }, [modalInputsData, experienceData, globalContext])
 
   return (
     <>
@@ -46,7 +54,7 @@ const ExperienceModal = ({
           name={name}
           fullWidth={fullWidth}
           validateElements={validateElements}
-          onChange={handleChange}
+          onChange={(name, value) => handleChange(name, value)}
           tryCloseModalState={tryCloseModalState}
         />
       ))}

@@ -1,11 +1,11 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useContext, useReducer } from 'react'
 import styled from 'styled-components/macro'
 
 import Switch from '@mui/material/Switch'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
+import { ResumeContext } from 'contexts/ResumeContext'
 
-import { dateToString } from 'utils/dateToString'
 import { BiDotsVerticalRounded as DotsVertical } from 'react-icons/bi'
 import { BsChevronUp } from 'react-icons/bs'
 import { BsChevronDown } from 'react-icons/bs'
@@ -13,14 +13,10 @@ import { BsChevronDown } from 'react-icons/bs'
 const Wrapper = styled.div`
   width: 100%;
   height: 7.5rem;
-  border-top: 1px solid var(--color-primary-300);
-  display: flex;
-  justify-content: space-between;
-  flex-direction: row;
+  border: 1px solid var(--color-primary-300);
 
-  &:first-child {
-    border-top: none;
-  }
+  display: flex;
+  flex-direction: row;
 `
 
 const ItemWrapper = styled.div`
@@ -34,6 +30,7 @@ const ItemWrapper = styled.div`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  letter-spacing: 1px;
 `
 
 const ItemText = styled.span`
@@ -48,10 +45,12 @@ const ItemText = styled.span`
 
   &:nth-child(2) {
     font-size: 1.3rem;
+    margin-top: 0.1rem;
   }
 
   &:nth-child(3) {
     font-size: 1.1rem;
+    margin-top: 0.4rem;
   }
 `
 
@@ -87,38 +86,68 @@ const MoveIconsWrapper = styled.div`
 
 const ListItem = (props) => {
   const [anchorEl, setAnchorEl] = useState(null)
-  const { position, companyName, city, startDate, endDate } = props.itemData
+  const { position, companyName, city, startDate, endDate, visible } = props.itemData
+  const { sectionId, itemKey } = props
+  const [globalState, setGlobalState] = useContext(ResumeContext)
 
-  const handleClick = useCallback((event) => setAnchorEl(event.currentTarget), [])
-  const handleClose = useCallback(() => setAnchorEl(null), [])
-  const handleEdit = useCallback(() => {
+  const handleOpenItemMenu = useCallback((event) => setAnchorEl(event.currentTarget), [])
+  const handleCloseItemMenu = useCallback(() => setAnchorEl(null), [])
+
+  const toggleShowItem = useCallback(() => {
+    setGlobalState((prevState) => ({
+      ...prevState,
+
+      //todo repair change visible switch button
+      [sectionId]: {
+        ...prevState[sectionId],
+        items: [...prevState[sectionId].items],
+      },
+    }))
+  }, [setGlobalState, sectionId])
+
+  const handleMoveItem = useCallback((type) => {
+    console.log(`move ${type}`)
+  }, [])
+  const handleEditItem = useCallback(() => {
     console.log('edytuj')
   }, [])
-  const handleRemove = useCallback(() => {
+  const handleRemoveItem = useCallback(() => {
     console.log('usuń')
   }, [])
 
   return (
     <Wrapper>
       <ItemWrapper>
-        <ItemText>{`${companyName}, ${city}`}</ItemText>
+        <ItemText>{`${companyName},  ${city}`}</ItemText>
         <ItemText>{`${position}`}</ItemText>
-        <ItemText>{`${dateToString({ startDate })} - ${dateToString({ endDate })}`}</ItemText>
+        <ItemText>{`${startDate} - ${endDate}`}</ItemText>
       </ItemWrapper>
       <ButtonsWrapper>
-        <Switch style={{ fontSize: '35px' }} size="50px" color="primary" name="toggleSwitch" />
-        <ReactIconsDotsVertical size="2.5rem" onClick={handleClick} />
-        <Menu id="long-menu" anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
+        <Switch
+          style={{ fontSize: '35px' }}
+          size="50px"
+          color="primary"
+          name="toggleSwitch"
+          defaultChecked={visible}
+          onClick={() => toggleShowItem()}
+        />
+        <ReactIconsDotsVertical size="2.5rem" onClick={handleOpenItemMenu} />
+        <Menu
+          id="long-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleCloseItemMenu}
+        >
           <MoveIconsWrapper>
-            <MaterialMenuItem onClick={handleClose}>
+            <MaterialMenuItem onClick={() => handleMoveItem('moveUp')}>
               <BsChevronUp disabled size="2.5rem" />
             </MaterialMenuItem>
-            <MaterialMenuItem onClick={handleClose}>
+            <MaterialMenuItem onClick={() => handleEditItem()}>
               <BsChevronDown size="2.5rem" />
             </MaterialMenuItem>
           </MoveIconsWrapper>
-          <MaterialMenuItem onClick={handleEdit}>Edytuj</MaterialMenuItem>
-          <MaterialMenuItem color={'red'} onClick={handleRemove}>
+          {/* <MaterialMenuItem onClick={handleEditItem}>Edytuj</MaterialMenuItem> */}
+          <MaterialMenuItem color={'red'} onClick={() => handleRemoveItem()}>
             Usuń
           </MaterialMenuItem>
         </Menu>

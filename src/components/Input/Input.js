@@ -93,26 +93,30 @@ const Input = (props) => {
 
   const handleUpdateValue = useCallback(
     (evt) => {
-      setInputValue(evt.target.value)
+      let value = null
+      type === 'textfield' ? (value = evt) : (value = evt.target.value)
+      setInputValue(value)
 
       if (id) {
-        evt.preventDefault()
+        //like inputs in normal sections without modals, like Section name or website link
         setGlobalState((prevState) => ({
           ...prevState,
-          [sectionId]: { ...prevState[sectionId], [id]: evt.target.value },
+          [sectionId]: { ...prevState[sectionId], [id]: value },
         }))
       } else {
-        onChange(evt)
+        //like modal fields
+        onChange(name, value)
       }
     },
-    [id, sectionId, setGlobalState, onChange]
+    [id, sectionId, setGlobalState, onChange, type, name]
   )
 
   useEffect(() => {
-    if (validateElements)
+    if (validateElements) {
       validateElements.forEach((element) => {
         if (element === name) setIsRequired(true)
       })
+    }
 
     if (isRequired && tryCloseModalState) {
       inputValue ? setIsValidated(true) : setIsValidated(false)
@@ -152,11 +156,12 @@ const Input = (props) => {
 
           {type === 'textfield' && (
             <ToolbarText
+              name={name}
               autoComplete={'off'}
               spellCheck={false}
               wrap="off"
               placeholder={placeholderName}
-              onChange={handleUpdateValue}
+              setValue={handleUpdateValue}
             />
           )}
           <AiFillCheckCircle
@@ -166,6 +171,7 @@ const Input = (props) => {
               width: '2rem',
               height: '5.8rem',
               right: '1.5rem',
+              top: '0',
               opacity: inputValue !== '' && id !== 'sectionName' ? '1' : '0',
               transition: 'opacity .4s',
               pointerEvents: 'none',

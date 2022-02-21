@@ -86,6 +86,7 @@ const BasicModal = ({ toggleModalState, childrenType, setCloseModal }) => {
                   modalInputsData={(posItem) => {
                     setModalData(posItem)
                   }}
+                  globalContext={contextState}
                   validateElements={validateElements}
                   modalData={item.modalData}
                   tryCloseModalState={tryCloseModalState}
