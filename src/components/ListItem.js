@@ -1,10 +1,13 @@
 import React, { useState, useCallback, useContext, useReducer } from 'react'
 import styled from 'styled-components/macro'
+import produce from 'immer'
 
 import Switch from '@mui/material/Switch'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import { ResumeContext } from 'contexts/ResumeContext'
+import { reorderArray } from 'utils/reorderArray'
+import BasicModal from 'modals/BasicModal'
 
 import { BiDotsVerticalRounded as DotsVertical } from 'react-icons/bi'
 import { BsChevronUp } from 'react-icons/bs'
@@ -85,35 +88,51 @@ const MoveIconsWrapper = styled.div`
 `
 
 const ListItem = (props) => {
-  const [anchorEl, setAnchorEl] = useState(null)
-  const { position, companyName, city, startDate, endDate, visible } = props.itemData
-  const { sectionId, itemKey } = props
   const [globalState, setGlobalState] = useContext(ResumeContext)
+  const [anchorEl, setAnchorEl] = useState(null)
+  const { position, companyName, city, startDate, endDate } = props.itemData
+  const { sectionId, itemIndex } = props
 
   const handleOpenItemMenu = useCallback((event) => setAnchorEl(event.currentTarget), [])
   const handleCloseItemMenu = useCallback(() => setAnchorEl(null), [])
 
   const toggleShowItem = useCallback(() => {
-    setGlobalState((prevState) => ({
-      ...prevState,
+    setGlobalState(
+      produce(globalState, (draftState) => {
+        let isVisible = draftState[sectionId].items[itemIndex].visible
+        draftState[sectionId].items[itemIndex].visible = !isVisible
+      })
+    )
+  }, [setGlobalState, sectionId, itemIndex, globalState])
 
-      //todo repair change visible switch button
-      [sectionId]: {
-        ...prevState[sectionId],
-        items: [...prevState[sectionId].items],
-      },
-    }))
-  }, [setGlobalState, sectionId])
-
-  const handleMoveItem = useCallback((type) => {
-    console.log(`move ${type}`)
-  }, [])
+  const handleMoveItem = useCallback(
+    (type) => {
+      setGlobalState(
+        produce(globalState, (draftState) => {
+          draftState[props.sectionId].items = reorderArray(
+            draftState[props.sectionId].items,
+            itemIndex,
+            type === 'moveDown' ? itemIndex + 1 : itemIndex - 1
+          )
+        })
+      )
+      handleCloseItemMenu()
+    },
+    [globalState, itemIndex, props.sectionId, setGlobalState, handleCloseItemMenu]
+  )
   const handleEditItem = useCallback(() => {
-    console.log('edytuj')
-  }, [])
+    // TODO: dokończyć edycje poszczególnego pola w tablicy
+    props.setTryEditData(true)
+  }, [props])
+
   const handleRemoveItem = useCallback(() => {
-    console.log('usuń')
-  }, [])
+    setGlobalState(
+      produce(globalState, (draftState) => {
+        draftState[props.sectionId].items.splice(itemIndex, 1)
+      })
+    )
+    handleCloseItemMenu()
+  }, [globalState, handleCloseItemMenu, itemIndex, props.sectionId, setGlobalState])
 
   return (
     <Wrapper>
@@ -128,8 +147,8 @@ const ListItem = (props) => {
           size="50px"
           color="primary"
           name="toggleSwitch"
-          defaultChecked={visible}
-          onClick={() => toggleShowItem()}
+          checked={globalState[sectionId].items[itemIndex].visible}
+          onChange={() => toggleShowItem()}
         />
         <ReactIconsDotsVertical size="2.5rem" onClick={handleOpenItemMenu} />
         <Menu
@@ -139,14 +158,22 @@ const ListItem = (props) => {
           onClose={handleCloseItemMenu}
         >
           <MoveIconsWrapper>
-            <MaterialMenuItem onClick={() => handleMoveItem('moveUp')}>
-              <BsChevronUp disabled size="2.5rem" />
+            <MaterialMenuItem
+              sx={{ p: 1.5 }}
+              disabled={itemIndex === 0 ? true : false}
+              onClick={() => handleMoveItem()}
+            >
+              <BsChevronUp disabled size="3rem" />
             </MaterialMenuItem>
-            <MaterialMenuItem onClick={() => handleEditItem()}>
-              <BsChevronDown size="2.5rem" />
+            <MaterialMenuItem
+              sx={{ p: 1.5 }}
+              disabled={itemIndex + 1 === globalState[sectionId].items.length ? true : false}
+              onClick={() => handleMoveItem('moveDown')}
+            >
+              <BsChevronDown size="3rem" />
             </MaterialMenuItem>
           </MoveIconsWrapper>
-          {/* <MaterialMenuItem onClick={handleEditItem}>Edytuj</MaterialMenuItem> */}
+          <MaterialMenuItem onClick={() => handleEditItem()}>Edytuj</MaterialMenuItem>
           <MaterialMenuItem color={'red'} onClick={() => handleRemoveItem()}>
             Usuń
           </MaterialMenuItem>

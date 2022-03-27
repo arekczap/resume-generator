@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd'
+import produce from 'immer'
 
 import { ResumeContext } from 'contexts/ResumeContext'
 
@@ -46,25 +47,28 @@ const Experience = (props) => {
   const [contextState, setContextState] = useContext(ResumeContext)
   const { name, description } = props.data
   const { items: dataItems } = props.stateData
+  const [toggleModal, setToggleModal] = useState(false)
+  const [tryEditData, setTryEditData] = useState(false)
 
   const onDragEnd = (result) => {
     // dropped outside the list
     if (!result.destination) return
 
-    setContextState((prevState) => ({
-      ...prevState,
-      [props.sectionId]: {
-        ...prevState[props.sectionId],
-        items: reorderArray(
+    setContextState(
+      produce(contextState, (draftState) => {
+        draftState[props.sectionId].items = reorderArray(
           contextState[props.sectionId].items,
           result.source.index,
           result.destination.index
-        ),
-      },
-    }))
+        )
+      })
+    )
   }
 
-  const [toggleModal, setToggleModal] = useState(false)
+  const toggleTryEditData = () => {
+    setToggleModal((prev) => !prev)
+    setTryEditData((prev) => !prev)
+  }
 
   return (
     <>
@@ -96,9 +100,12 @@ const Experience = (props) => {
                           ...provided.draggableProps.style,
                         }}
                       >
-                        <ListItem itemKey={item.id} sectionId={props.sectionId} itemData={item}>
-                          {item.name}
-                        </ListItem>
+                        <ListItem
+                          setTryEditData={toggleTryEditData}
+                          sectionId={props.sectionId}
+                          itemData={item}
+                          itemIndex={index}
+                        />
                       </div>
                     )}
                   </Draggable>
@@ -114,6 +121,7 @@ const Experience = (props) => {
       <ButtonWrapper>
         <ModalButton onClick={() => setToggleModal((prev) => !prev)}>Dodaj</ModalButton>
         <BasicModal
+          tryEditData={tryEditData}
           childrenType={props.sectionId}
           setCloseModal={() => setToggleModal((prev) => !prev)}
           toggleModalState={toggleModal}

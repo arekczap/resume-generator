@@ -31,7 +31,7 @@ const ButtonsWrapper = styled.div`
   justify-content: flex-end;
 `
 
-const BasicModal = ({ toggleModalState, childrenType, setCloseModal }) => {
+const BasicModal = ({ toggleModalState, childrenType, setCloseModal, tryEditData }) => {
   const [contextState, setContextState] = useContext(ResumeContext)
   const [modalData, setModalData] = useState()
   const [validateElements, setValidateElements] = useState()
@@ -97,7 +97,9 @@ const BasicModal = ({ toggleModalState, childrenType, setCloseModal }) => {
             <ModalButton style={{ marginRight: ' 2rem' }} onClick={handleClose}>
               Anuluj
             </ModalButton>
-            <ModalButton onClick={handleAddItem}>Dodaj pozycję</ModalButton>
+            <ModalButton onClick={handleAddItem}>
+              {tryEditData ? 'Aktualizuj' : 'Dodaj pozycję'}
+            </ModalButton>
           </ButtonsWrapper>
         </StyledBox>
       </Modal>
