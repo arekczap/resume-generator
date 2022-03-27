@@ -18,7 +18,7 @@ export const initialState = {
     sectionName: 'Doświadczenie',
     items: [
       {
-        id: 1,
+        id: 0,
         position: 'Front-End Developer 1',
         companyName: 'Pyramid Games SA.',
         city: 'Lublin',
@@ -28,7 +28,7 @@ export const initialState = {
         visible: true,
       },
       {
-        id: 2,
+        id: 1,
         position: 'Front-End Developer 2',
         companyName: 'Pyramid Games SA.',
         city: 'Lublin',
@@ -38,7 +38,7 @@ export const initialState = {
         visible: true,
       },
       {
-        id: 3,
+        id: 2,
         position: 'Front-End Developer 3',
         companyName: 'Pyramid Games SA.',
         city: 'Lublin',

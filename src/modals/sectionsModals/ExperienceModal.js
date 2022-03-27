@@ -30,7 +30,7 @@ const ExperienceModal = ({
     (name, value) => {
       setExperienceData((prevState) => ({
         ...prevState,
-        id: globalContext[location.pathname.split('/').slice(-1)].items.length + 1,
+        id: globalContext[location.pathname.split('/').slice(-1)].items.length,
         [name]: value,
       }))
     },
